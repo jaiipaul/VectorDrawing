@@ -27,7 +27,8 @@ class CLine{
     ~CLine();
 
    void drawLine(CImage* img);
-   void opacity(CImage *img);
+   void opacity(CImage* img);
+
 };
 
 #endif /*CPOINT_H_*/
