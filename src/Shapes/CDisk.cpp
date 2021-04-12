@@ -13,29 +13,29 @@ CDisk::CDisk(string command, string type, size_t pos1){
 
   pos2 = command.find(",", pos1+1);
   _radius      = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
-  cout << pos2 <<"_"<< _length  << endl;
+  cout << pos2 <<"_"<< _radius  << endl;
 
   pos1     = command.find(",", pos2+1);
   _red      = atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
-  cout << pos1 <<"_"<< _height  << endl;
+  cout << pos1 <<"_"<< _red  << endl;
 
   pos2  = command.find(",", pos1+1);
   _green         = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
-  cout << pos2 <<"_"<< _red << endl;
+  cout << pos2 <<"_"<< _green << endl;
 
   pos1  = command.find(",", pos2+1);
   _blue       = atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
-  cout << pos1 <<"_"<< _green << endl;
+  cout << pos1 <<"_"<< _blue << endl;
 
   pos2  = command.find(",", pos1+1);
   _opacity        = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
-  cout << pos2 <<"_"<< _blue << endl;
+  cout << pos2 <<"_"<< _opacity << endl;
 }
 
 CDisk::~CDisk(){
 }
 
-void CRectangle::drawRectangle(CImage* img){
+void CDisk::drawDisk(CImage* img){
   opacity(img);
   if (_type == "DISK"){
     int x = 0;
@@ -43,7 +43,7 @@ void CRectangle::drawRectangle(CImage* img){
     int m = 5 - 4*_radius;
     while (x <= y){
         CLigne* row;
-        Cpixel* pix;
+        CPixel* pix;
 
         row = img->getLigne(_y + y);
         pix = row->getPixel(_x + x);
@@ -74,7 +74,7 @@ void CRectangle::drawRectangle(CImage* img){
           m = m - 8*y;
         }
         x++;
-        m = m + 8*x + 4
+        m = m + 8*x + 4;
     }
   }
   if ( _type == "DISK_F"){
@@ -82,7 +82,7 @@ void CRectangle::drawRectangle(CImage* img){
   }
 }
 
-void CRectangle::opacity(CImage* img){
+void CDisk::opacity(CImage* img){
   double opacity = (double)_opacity/100;
   _red   = floor(opacity*_red   + (1-opacity)*img->r_backgnd);
   _green = floor(opacity*_green + (1-opacity)*img->g_backgnd);

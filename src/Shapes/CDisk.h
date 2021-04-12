@@ -13,8 +13,8 @@ using namespace std;
 class CDisk{
   private :
     string _type;
-    int    _x1;
-    int    _y1;
+    int    _x;
+    int    _y;
     int    _radius;
     int    _red;
     int    _green;
@@ -26,7 +26,7 @@ class CDisk{
     ~CDisk();
 
    void drawDisk(CImage* img);
-   void opacity(CImage* img )
+   void opacity(CImage* img );
 };
 
 #endif /*CPOINT_H_*/
