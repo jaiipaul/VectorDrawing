@@ -1,0 +1,40 @@
+##  LIGNE     : X, Y, X2, Y2,                    R, V, B, TRANSPARENCE, Z;
+##  TRIANGLE  : X, Y, X1, Y1, X2, Y2,            R, V, B, TRANSPARENCE, Z;
+##  RECTANGLE : X, Y, LONGUEUR, LARGEUR, ANGLED, R, V, B, TRANSPARENCE, Z;
+##  CARRE     : X, Y, COTE, ANGLED,              R, V, B, TRANSPARENCE, Z;
+##  POINT     : X, Y,                            R, V, B, TRANSPARENCE, Z;
+##  CERCLE    : X, Y, RAYON, 		                 R, V, B, TRANSPARENCE, Z;
+
+
+##Fond
+RECTANGLES : 300, 150, 625, 700, 0, 255, 255, 255, 100, 0;
+
+##Tête
+CERCLES : 600, 600, 200, 240, 234, 40, 100, 2;
+CERCLES  : 600, 600, 205, 0, 0, 0, 100, 1;
+
+##Oreilles
+TRIANGLES : 350, 200, 420, 540, 540, 500,  240, 234, 40, 100, 2;
+TRIANGLES : 850, 200, 780, 540, 660, 500,  240, 234, 40, 100, 2;
+TRIANGLES : 350, 200, 367, 290, 390, 260,  0, 0, 0, 100, 3;
+TRIANGLES : 850, 200, 833, 290, 810, 260,  0, 0, 0, 100, 3;
+TRIANGLES : 346, 190, 414, 545, 550, 505, 0, 0, 0, 100, 1;
+TRIANGLES : 854, 190, 786, 545, 650, 505, 0, 0, 0, 100, 1;
+
+##Joues
+CERCLES : 475, 705, 40, 255, 0, 0, 100, 3;
+CERCLES : 725, 705, 40, 255, 0, 0, 100, 3;
+
+##Yeux
+CERCLES : 500, 600, 35, 0, 0, 0, 100, 3;
+CERCLES : 700, 600, 35, 0, 0, 0, 100, 3;
+CERCLES : 510, 580, 10, 255, 255, 255, 100, 4;
+CERCLES : 690, 580, 10, 255, 255, 255, 100, 4;
+
+##Bouche
+CERCLES : 600, 680, 40, 245, 174, 174, 100, 3;
+CERCLES : 580, 650, 30, 240, 234, 40, 100, 4;
+CERCLES : 620, 650, 30, 240, 234, 40, 100, 4;
+
+##Nez
+TRIANGLES : 600, 650, 590, 640, 610, 640, 0, 0, 0, 100, 5;

@@ -1,0 +1,19 @@
+Rectangleplein : 195, 120, 10, 350, vert, 0, 0 ;
+Ligne : 195, 470, 150, 359, vert, 0 ;
+Ligne : 195, 450, 150, 360, vert, 0 ;
+Ligne : 205, 450, 250, 359, vert, 0 ;
+Ligne : 205, 470, 250, 360, vert, 0 ;
+
+cercleplein : 200, 120, 60, jaune, 0, 7 ;
+cercleplein : 165, 105, 10, noir, 0, 8 ;
+cercleplein : 235, 105, 10, noir, 0, 9 ;
+cercleplein : 200,130, 3,violet,0,10 ;
+cercleplein : 200, 155, 10, noir, 0, 11;
+rectangleplein : 180, 140, 30, 20, jaune, 0, 12;
+
+
+cercleplein : 260, 120, 50, rouge, 0, 1 ;
+cercleplein : 218, 177, 50, rouge, 0, 4 ;
+cercleplein : 152, 155, 50, rouge, 0, 2 ;
+cercleplein : 152, 85, 50, rouge, 0, 5 ;
+cercleplein : 218, 63, 50, rouge, 0, 3 ;

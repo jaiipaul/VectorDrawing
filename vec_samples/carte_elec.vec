@@ -1,0 +1,89 @@
+carte
+[RECTANGLES : 0, 0, 399, 449, vert pomme, 1, 70 ;]
+
+condos chimiques
+[CERCLES : 100, 100, 40, azur, 2 ;]
+[CERCLES : 100, 100, 35, gris, 3, 70 ;]
+
+[CERCLES : 190, 100, 40, azur, 2 ;]
+[CERCLES : 190, 100, 35, gris, 3, 70 ;]
+
+[CERCLES : 100, 190, 40, azur, 2 ;]
+[CERCLES : 100, 190, 35, gris, 3, 70 ;]
+
+resistances
+[RECTANGLES : 300, 100, 40, 10, orange, 2 ;]
+[LIGNE : 305, 150, 305, 90, noir, 1 ;]
+[LIGNE : 300, 110, 310, 110, indigo, 3 ;]
+[LIGNE : 300, 120, 310, 120, canard, 3 ;]
+[LIGNE : 300, 130, 310, 130, canard, 3 ;]
+
+[RECTANGLES : 340, 100, 40, 10, orange, 2 ;]
+[LIGNE : 345, 150, 345, 90, noir, 1 ;]
+[LIGNE : 340, 110, 350, 110, bordeaux, 3 ;]
+[LIGNE : 340, 120, 350, 120, jaune, 3 ;]
+[LIGNE : 340, 130, 350, 130, sang de boeuf, 3 ;]
+
+[RECTANGLES : 320, 100, 40, 10, orange, 2 ;]
+[LIGNE : 325, 150, 325, 90, noir, 1 ;]
+[LIGNE : 320, 110, 330, 110, canard, 3 ;]
+[LIGNE : 320, 120, 330, 120, violet, 3 ;]
+[LIGNE : 320, 130, 330, 130, jaune, 3 ;]
+
+[RECTANGLES : 360, 100, 40, 10, orange, 2 ;]
+[LIGNE : 365, 150, 365, 90, noir, 1 ;]
+[LIGNE : 360, 110, 370, 110, violet, 3 ;]
+[LIGNE : 360, 120, 370, 120, violet, 3 ;]
+[LIGNE : 360, 130, 370, 130, jaune, 3 ;]
+
+[RECTANGLES : 380, 100, 40, 10, orange, 2 ;]
+[LIGNE : 385, 150, 385, 90, noir, 1 ;]
+[LIGNE : 380, 110, 390, 110, canard, 3 ;]
+[LIGNE : 380, 120, 390, 120, violet, 3 ;]
+[LIGNE : 380, 130, 390, 130, aigue-marine, 3 ;]
+
+[RECTANGLES : 170, 160, 10, 40, orange, 2 ;]
+[LIGNE : 160, 165, 220, 165, noir, 1 ;]
+[LIGNE : 180, 160, 180, 170, canard, 3 ;]
+[LIGNE : 190, 160, 190, 170, violet, 3 ;]
+[LIGNE : 200, 160, 200, 170, aigue-marine, 3 ;]
+
+[RECTANGLES : 170, 180, 10, 40, orange, 2 ;]
+[LIGNE : 160, 185, 220, 185, noir, 1 ;]
+[LIGNE : 180, 180, 180, 190, canard, 3 ;]
+[LIGNE : 190, 180, 190, 190, violet, 3 ;]
+[LIGNE : 200, 180, 200, 190, aigue-marine, 3 ;]
+
+aop
+[RECTANGLES : 200, 250, 50, 100, noir, 2 ;]
+[LIGNE : 210, 240, 210, 310, gris, 1 ;]
+[LIGNE : 220, 240, 220, 310, gris, 1 ;]
+[LIGNE : 230, 240, 230, 310, gris, 1 ;]
+[LIGNE : 240, 240, 240, 310, gris, 1 ;]
+[LIGNE : 250, 240, 250, 310, gris, 1 ;]
+[LIGNE : 260, 240, 260, 310, gris, 1 ;]
+[LIGNE : 270, 240, 270, 310, gris, 1 ;]
+[LIGNE : 280, 240, 280, 310, gris, 1 ;]
+[LIGNE : 290, 240, 290, 310, gris, 1 ;]
+
+condos
+[CERCLES : 260, 180, 10, jaune, 1 ;]
+[CERCLES : 290, 180, 10, jaune, 1 ;]
+[CERCLES : 320, 180, 10, jaune, 1 ;]
+
+trous
+[CERCLE : 20, 20, 10, noir, 1 ;]
+[LIGNE : 15, 15, 25, 25, noir, 1 ;]
+[LIGNE : 15, 25, 25, 15, noir, 1 ;]
+
+[CERCLE : 20, 380, 10, noir, 1 ;]
+[LIGNE : 15, 375, 25, 385, noir, 1 ;]
+[LIGNE : 15, 385, 25, 375, noir, 1 ;]
+
+[CERCLE : 430, 20, 10, noir, 1 ;]
+[LIGNE : 425, 15, 435, 25, noir, 1 ;]
+[LIGNE : 425, 25, 435, 15, noir, 1 ;]
+
+[CERCLE : 430, 380, 10, noir, 1 ;]
+[LIGNE : 425, 375, 435, 385, noir, 1 ;]
+[LIGNE : 425, 385, 435, 375, noir, 1 ;]
