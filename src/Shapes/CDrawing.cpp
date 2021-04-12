@@ -65,7 +65,7 @@ bool CDrawing::LoadDrawing(const string filename){
           cout <<"-----------------"<<endl;
       }
       if(type == "DISK" || type == "DISK_F"){
-          (type == "DISK_F")?cout <<"\033[33m"<< "DISK_F           " <<"\033[0m" << endl:cout <<"\033[33m"<< "DISK             " <<"\033[0m" << endl;
+          (type == "DISK_F")?cout <<"\033[42m"<< "DISK_F           " <<"\033[0m" << endl:cout <<"\033[42m"<< "DISK             " <<"\033[0m" << endl;
           CDisk* shape = new CDisk(STRING, type, pos);
           _disks.push_back(shape);
           disk_cnt++;//_size_points++;
