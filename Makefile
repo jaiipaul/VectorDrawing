@@ -14,6 +14,7 @@ SRC=./src/Format/CBitmap.cpp   \
 		./src/Shapes/CPoint.cpp    \
 		./src/Shapes/CRectangle.cpp    \
 		./src/Shapes/CDisk.cpp    \
+		./src/Shapes/CLine.cpp    \
     ./src/VectorDrawing.cpp
 
 OBJ= $(SRC:.cpp=.o)
