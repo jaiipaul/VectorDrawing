@@ -72,6 +72,14 @@ bool CDrawing::LoadDrawing(const string filename){
           cout << disk_cnt /*_size_points*/ << " Disk(s) loaded" << endl;
           cout <<"-----------------"<<endl;
       }
+      if(type == "LINE"){
+          cout <<"\033[41m"<< "LINE             " <<"\033[0m" << endl;
+          CLine* shape = new CLine(STRING, type, pos);
+          _lines.push_back(shape);
+          line_cnt++;//_size_points++;
+          cout << line_cnt /*_size_points*/ << " Line(s) loaded" << endl;
+          cout <<"-----------------"<<endl;
+      }
 
     }
     getline(infile, STRING);
