@@ -101,7 +101,7 @@ void CDisk::drawDisk(CImage* img){
           pix = row->getPixel(_x - y);
           pix->RGB( _red, _green, _blue);
         }
-        
+
         row = img->getLigne(_y - y);
         for(int k = 0; k<=x; k++){
           pix = row->getPixel(_x + x);
