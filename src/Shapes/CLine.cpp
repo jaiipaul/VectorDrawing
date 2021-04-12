@@ -34,7 +34,6 @@ CLine::CLine(string command, string type, size_t pos1){
   pos1  = command.find(";", pos2+1);
   _opacity     = atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
   cout << pos1 <<"_"<< _opacity << endl;
-  cout <<"-----------------"<<endl;
 }
 
 CLine::~CLine(){

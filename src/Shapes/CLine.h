@@ -11,7 +11,7 @@ using namespace std;
 #define CLINE_H_
 
 class CLine{
-  private :
+  public :
     string _type;
     int    _x1;
     int    _y1;
