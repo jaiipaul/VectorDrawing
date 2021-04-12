@@ -7,8 +7,8 @@
 
 using namespace std;
 
-#ifndef CLINE_H_
-#define CLINE_H_
+#ifndef CRECTANGLE_H_
+#define CRECTANGLE_H_
 
 class CRectangle{
   private :

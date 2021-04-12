@@ -39,6 +39,7 @@ bool CDrawing::LoadDrawing(const string filename){
   }
   int point_cnt     = 0;
   int rectangle_cnt = 0;
+  int line_cnt      = 0;
 
   getline(infile, STRING);
 
@@ -64,6 +65,14 @@ bool CDrawing::LoadDrawing(const string filename){
           cout << rectangle_cnt /*_size_points*/ << " Rectangle(s) loaded" << endl;
           cout <<"-----------------"<<endl;
       }
+      if(type == "LINE"){
+          cout <<"\033[44m"<< "LINE             " <<"\033[0m" << endl;
+          CLine* shape = new CLine(STRING, type, pos);
+          _lines.push_back(shape);
+          line_cnt++;//_size_points++;
+          cout << line_cnt /*_size_points*/ << " Line(s) loaded" << endl;
+          cout <<"-----------------"<<endl;
+      }
 
     }
     getline(infile, STRING);
@@ -72,7 +81,9 @@ bool CDrawing::LoadDrawing(const string filename){
 
   _size_points = point_cnt;
   _size_rectangles = rectangle_cnt;
-  _size = point_cnt + rectangle_cnt;// _size_points; // + ...;
+  _size_lines = line_cnt;
+
+  _size = point_cnt + rectangle_cnt + line_cnt;// _size_points; // + ...;
   cout << _size << " shape(s) loaded" << endl;
   return true;
 }
@@ -86,5 +97,10 @@ bool CDrawing::Draw(){//CImage* img){
     _rectangles[i]->drawRectangle(_img);
     cout <<"rectangle " << i+1 << " drawn" << endl;
   }
+  for (int i = 0; i < _size_lines; i++){
+    _lines[i]->drawLine(_img);
+    cout <<"line " << i+1 << " drawn" << endl;
+  }
+
   return true;
 }

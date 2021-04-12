@@ -4,5 +4,6 @@
 
 #include "CPoint.h"
 #include "CRectangle.h"
+#include "CLine.h"
 
 #endif /*CSHAPE_H_*/

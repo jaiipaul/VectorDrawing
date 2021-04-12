@@ -19,10 +19,14 @@ class CDrawing{
     //CShape**        _shapes;
     vector<CPoint*>     _points;
     vector<CRectangle*> _rectangles;
+    vector<CLine*>      _lines;
+
     int             _selector;
     int             _size;
     int             _size_points;
     int             _size_rectangles;
+    int             _size_lines;
+
 
   public :
     //CShape(string type, string color, string opacity)
