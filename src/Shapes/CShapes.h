@@ -4,5 +4,6 @@
 
 #include "CPoint.h"
 #include "CRectangle.h"
+#include "CDisk.h"
 
-#endif /*CSHAPE_H_*/
+#endif /*CSHAPES_H_*/

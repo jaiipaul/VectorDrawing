@@ -78,7 +78,53 @@ void CDisk::drawDisk(CImage* img){
     }
   }
   if ( _type == "DISK_F"){
-    //TO DO
+    int x = 0;
+    int y = _radius;
+    int m = 5 - 4*_radius;
+    while (x <= y){
+        CLigne* row;
+        CPixel* pix;
+
+        row = img->getLigne(_y + y);
+        for(int k = 0; k<=x; k++){
+          pix = row->getPixel(_x + x);
+          pix->RGB( _red, _green, _blue);
+          pix = row->getPixel(_x - x);
+          pix->RGB( _red, _green, _blue);
+        }
+
+
+        row = img->getLigne(_y + x);
+        for(int k = 0; k<=x; k++){
+          pix = row->getPixel(_x + y);
+          pix->RGB( _red, _green, _blue);
+          pix = row->getPixel(_x - y);
+          pix->RGB( _red, _green, _blue);
+        }
+        
+        row = img->getLigne(_y - y);
+        for(int k = 0; k<=x; k++){
+          pix = row->getPixel(_x + x);
+          pix->RGB( _red, _green, _blue);
+          pix = row->getPixel(_x - x);
+          pix->RGB( _red, _green, _blue);
+        }
+
+        row = img->getLigne(_y - x);
+        for(int k = 0; k<=x; k++){
+          pix = row->getPixel(_x + y);
+          pix->RGB( _red, _green, _blue);
+          pix = row->getPixel(_x - y);
+          pix->RGB( _red, _green, _blue);
+        }
+
+        if(m > 0){
+          y--;
+          m = m - 8*y;
+        }
+        x++;
+        m = m + 8*x + 4;
+    }
   }
 }
 

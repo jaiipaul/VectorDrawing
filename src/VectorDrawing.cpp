@@ -20,7 +20,7 @@ int main(int argc, char * argv[]) {
     cout << "(II) CImage pointer extraction" << endl;
     //CImage *img = new CImage(200,200);
     CDrawing *Drawing = new CDrawing(40, 40, 255, 255, 255);
-
+    //cout<<"start loading drawing"<<endl;
     Drawing->LoadDrawing(argv[1]);
     Drawing->Draw();
 
