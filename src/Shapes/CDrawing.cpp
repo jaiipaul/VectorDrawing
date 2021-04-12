@@ -41,6 +41,7 @@ bool CDrawing::LoadDrawing(const string filename){
   int rectangle_cnt = 0;
   int line_cnt      = 0;
 
+  int disk_cnt = 0;
   getline(infile, STRING);
 
   while(not(infile.eof())){
@@ -72,6 +73,13 @@ bool CDrawing::LoadDrawing(const string filename){
           line_cnt++;//_size_points++;
           cout << line_cnt /*_size_points*/ << " Line(s) loaded" << endl;
           cout <<"-----------------"<<endl;
+      if(type == "DISK" || type == "DISK_F"){
+          (type == "DISK_F")?cout <<"\033[42m"<< "DISK_F           " <<"\033[0m" << endl:cout <<"\033[42m"<< "DISK             " <<"\033[0m" << endl;
+          CDisk* shape = new CDisk(STRING, type, pos);
+          _disks.push_back(shape);
+          disk_cnt++;//_size_points++;
+          cout << disk_cnt /*_size_points*/ << " Disk(s) loaded" << endl;
+          cout <<"-----------------"<<endl;
       }
 
     }
@@ -82,8 +90,10 @@ bool CDrawing::LoadDrawing(const string filename){
   _size_points = point_cnt;
   _size_rectangles = rectangle_cnt;
   _size_lines = line_cnt;
+  _size_disks = disk_cnt;
 
-  _size = point_cnt + rectangle_cnt + line_cnt;// _size_points; // + ...;
+  _size = point_cnt + rectangle_cnt + disk_cnt + line_cnt;// _size_points; // + ...;
+
   cout << _size << " shape(s) loaded" << endl;
   return true;
 }
@@ -101,6 +111,9 @@ bool CDrawing::Draw(){//CImage* img){
     _lines[i]->drawLine(_img);
     cout <<"line " << i+1 << " drawn" << endl;
   }
-
+  for (int i = 0; i < _size_disks; i++){
+    _disks[i]->drawDisk(_img);
+    cout <<"disk " << i+1 << " drawn" << endl;
+  }
   return true;
 }

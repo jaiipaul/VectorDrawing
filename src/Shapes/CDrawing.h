@@ -18,6 +18,7 @@ class CDrawing{
     CImage*         _img;
     //CShape**        _shapes;
     vector<CPoint*>     _points;
+    vector<CDisk*>     _disks;
     vector<CRectangle*> _rectangles;
     vector<CLine*>      _lines;
 
@@ -26,8 +27,8 @@ class CDrawing{
     int             _size_points;
     int             _size_rectangles;
     int             _size_lines;
-
-
+    int             _size_disks;
+    
   public :
     //CShape(string type, string color, string opacity)
     CDrawing(int width, int height);
