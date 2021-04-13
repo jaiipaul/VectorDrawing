@@ -27,7 +27,7 @@ CDisk::CDisk(string command, string type, size_t pos1){
   _blue       = atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
   cout << pos1 <<"_"<< _blue << endl;
 
-  pos2  = command.find(",", pos1+1);
+  pos2  = command.find(";", pos1+1);
   _opacity        = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
   cout << pos2 <<"_"<< _opacity << endl;
 }

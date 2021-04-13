@@ -71,14 +71,13 @@ bool CDrawing::LoadDrawing(const string filename){
           cout <<"-----------------"<<endl;
           //delete shape_d;
       }
-      /*:if(type == "LINE"){
+      if(type == "LINE"){
           cout <<"\033[41m"<< "LINE             " <<"\033[0m" << endl;
-          CLine* shape = new CLine(STRING, type, pos);
-          _lines.push_back(shape);
-          line_cnt++;//_size_points++;
-          cout << line_cnt /*_size_points << " Line(s) loaded" << endl;
+          CLine* shape_l = new CLine(STRING, type, pos);
+          _shapes.push_back(shape_l);
+          _size++;//_size_points++;
           cout <<"-----------------"<<endl;
-      }*/
+      }
 
     }
     getline(infile, STRING);

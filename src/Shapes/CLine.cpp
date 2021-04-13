@@ -39,8 +39,8 @@ CLine::CLine(string command, string type, size_t pos1){
 CLine::~CLine(){
 }
 
-void CLine::drawLine(CImage* img){
-  opacity(img);
+void CLine::draw(CImage* img){
+  CShape::opacity(img);
   int x, y, px, py;
   double pente, p;
   int invert = 0;
@@ -49,20 +49,21 @@ void CLine::drawLine(CImage* img){
   int* x2;
   int* y2;
   int  tmp;
+  cout << "0" << endl;
   if (abs(_y2-_y1) > abs(_x2-_x1)){
-    *x1 = _y1;
+    /**x1 = _y1;
     *y1 = _x1;
     *x2 = _y2;
-    *y2 = _x2;
+    *y2 = _x2;*/
     cout << "1" << endl;
   } else {
-    *x1 = _x1;
+    /**x1 = _x1;
     *y1 = _y1;
     *x2 = _x2;
-    *y2 = _y2;
+    *y2 = _y2;*/
     cout << "2" << endl;
   }
-  if (x1 > x2) {
+  if (x2 < x1) {
     invert = 1;
     tmp = *x1;
     x1 = x2;
@@ -99,11 +100,4 @@ void CLine::drawLine(CImage* img){
     CPixel* pix = row->getPixel(px);
     pix->RGB(_red, _green, _blue);
   }
-}
-
-void CLine::opacity(CImage* img){
-  double opacity = (double)_opacity/100;
-  _red   = floor(opacity*_red   + (1-opacity)*img->r_backgnd);
-  _green = floor(opacity*_green + (1-opacity)*img->g_backgnd);
-  _blue  = floor(opacity*_blue  + (1-opacity)*img->b_backgnd);
 }
