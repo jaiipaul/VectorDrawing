@@ -4,7 +4,10 @@ CShape::CShape(){
 }
 
 CShape::~CShape(){
-  delete _shape;
+}
+
+void CShape::draw(CImage* img){
+  cout << "nothing to draw" << endl;
 }
 
 void CShape::opacity(CImage* img){

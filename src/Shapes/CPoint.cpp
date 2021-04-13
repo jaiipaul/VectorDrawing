@@ -32,7 +32,8 @@ CPoint::~CPoint(){
 }
 
 void CPoint::draw(CImage* img){
-  opacity(img);
+  //cout<<"pk"<<endl;
+  CShape::opacity(img);
   CPixel *p = img->getPixel(_x, _y);
   p->RGB(  _red,  _green,  _blue);
 }

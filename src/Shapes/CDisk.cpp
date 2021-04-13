@@ -35,8 +35,8 @@ CDisk::CDisk(string command, string type, size_t pos1){
 CDisk::~CDisk(){
 }
 
-void CDisk::drawDisk(CImage* img){
-  opacity(img);
+void CDisk::draw(CImage* img){
+  CShape::opacity(img);
   if (_type == "DISK"){
     int x = 0;
     int y = _radius;
@@ -126,11 +126,4 @@ void CDisk::drawDisk(CImage* img){
       }
     }
   }
-}
-
-void CDisk::opacity(CImage* img){
-  double opacity = (double)_opacity/100;
-  _red   = floor(opacity*_red   + (1-opacity)*img->r_backgnd);
-  _green = floor(opacity*_green + (1-opacity)*img->g_backgnd);
-  _blue  = floor(opacity*_blue  + (1-opacity)*img->b_backgnd);
 }

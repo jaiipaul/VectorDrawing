@@ -22,12 +22,13 @@ int main(int argc, char * argv[]) {
     CDrawing *Drawing = new CDrawing(40, 40, 255, 255, 255);
     //cout<<"start loading drawing"<<endl;
     Drawing->LoadDrawing(argv[1]);
-    Drawing->Draw();
+    Drawing->DrawImage();
 
     image->setImage( Drawing->_img );
     cout << "(II) CBitmap image saving" << endl;
     image->SaveBMP(filename2);
 
     delete Drawing;
+    //delete image;
     return 1;
 }

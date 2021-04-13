@@ -2,7 +2,7 @@
 
 CRectangle::CRectangle(string command, string type, size_t pos1){
   _type = type;
-
+  //cout << pos1 <<"_"<< _type  << endl;
   size_t pos2 = command.find(",");
   _x           = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
   cout << pos2 <<"_"<< _x  << endl;
@@ -40,8 +40,8 @@ CRectangle::CRectangle(string command, string type, size_t pos1){
 CRectangle::~CRectangle(){
 }
 
-void CRectangle::drawRectangle(CImage* img){
-  opacity(img);
+void CRectangle::draw(CImage* img){
+  CShape::opacity(img);
   if (_type == "RECTANGLE"){
     for(int ligne =0; ligne < _height; ligne++){
         CLigne* row = img->getLigne(_y + ligne);
@@ -68,11 +68,4 @@ void CRectangle::drawRectangle(CImage* img){
         }
      }
   }
-}
-
-void CRectangle::opacity(CImage* img){
-  double opacity = (double)_opacity/100;
-  _red   = floor(opacity*_red   + (1-opacity)*img->r_backgnd);
-  _green = floor(opacity*_green + (1-opacity)*img->g_backgnd);
-  _blue  = floor(opacity*_blue  + (1-opacity)*img->b_backgnd);
 }

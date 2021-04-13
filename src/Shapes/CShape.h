@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
-
-#include "CPoint.h"
-
+#include <math.h>
+#include "../Image/CImage.h"
 using namespace std;
 
 #ifndef CSHAPE_H_
@@ -20,9 +19,10 @@ class CShape{
 
   public :
     //CShape(string type, string color, string opacity)
-    CShape(const string geometry);
+    CShape();
     ~CShape();
 
+    virtual void draw(CImage* img)=0;
     void opacity(CImage* img);
 };
 #endif /*CSHAPE_H_*/

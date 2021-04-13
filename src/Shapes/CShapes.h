@@ -2,6 +2,7 @@
 #ifndef CSHAPES_H_
 #define CSHAPES_H_
 
+#include "CShape.h"
 #include "CPoint.h"
 #include "CRectangle.h"
 #include "CDisk.h"

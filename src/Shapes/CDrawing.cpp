@@ -11,11 +11,11 @@ CDrawing::CDrawing(int width, int height, int r, int g, int b){
 }
 
 CDrawing::~CDrawing(){
-    for(int i=0; i<_size_points; i++)
-        delete _points[i];
+    for(int i=0; i<_size; i++)
+        delete _shapes[i];
 
     //delete _shapes;
-    _points.clear();
+    _shapes.clear();
 }
 
 bool CDrawing::CreateImage(int width, int height){
@@ -37,10 +37,6 @@ bool CDrawing::LoadDrawing(const string filename){
   if (infile.is_open() == false){
     exit(EXIT_FAILURE);
   }
-  int point_cnt     = 0;
-  int rectangle_cnt = 0;
-  int disk_cnt = 0;
-  int line_cnt = 0;
   getline(infile, STRING);
 
   while(not(infile.eof())){
@@ -51,67 +47,57 @@ bool CDrawing::LoadDrawing(const string filename){
       string type = STRING.substr(0,pos-1);
       if(type == "POINT"){
           cout <<"\033[44m"<< "POINT            " <<"\033[0m" << endl;
-          CPoint* shape = new CPoint(STRING, type, pos);
-          _points.push_back(shape);
-          point_cnt++;//_size_points++;
-          cout << point_cnt /*_size_points*/ << " Point(s) loaded" << endl;
+          CPoint* shape_p = new CPoint(STRING, type, pos);
+          _shapes.push_back(shape_p);
+          _size++;
           cout <<"-----------------"<<endl;
+          //shape_p->draw(_img);
+          //DrawShape(_img, shape_p);
+          //delete shape_p;
       }
       if(type == "RECTANGLE" || type == "RECTANGLE_F"){
           (type == "RECTANGLE_F")?cout <<"\033[45m"<< "RECTANGLE_F      " <<"\033[0m" << endl:cout <<"\033[45m"<< "RECTANGLE        " <<"\033[0m" << endl;
-          CRectangle* shape = new CRectangle(STRING, type, pos);
-          _rectangles.push_back(shape);
-          rectangle_cnt++;//_size_points++;
-          cout << rectangle_cnt /*_size_points*/ << " Rectangle(s) loaded" << endl;
+          CRectangle* shape_r = new CRectangle(STRING, type, pos);
+          _shapes.push_back(shape_r);
+          _size++;
           cout <<"-----------------"<<endl;
+          //delete shape_r;
       }
       if(type == "DISK" || type == "DISK_F"){
           (type == "DISK_F")?cout <<"\033[42m"<< "DISK_F           " <<"\033[0m" << endl:cout <<"\033[42m"<< "DISK             " <<"\033[0m" << endl;
-          CDisk* shape = new CDisk(STRING, type, pos);
-          _disks.push_back(shape);
-          disk_cnt++;//_size_points++;
-          cout << disk_cnt /*_size_points*/ << " Disk(s) loaded" << endl;
+          CDisk* shape_d = new CDisk(STRING, type, pos);
+          _shapes.push_back(shape_d);
+          _size++;//_size_points++;
           cout <<"-----------------"<<endl;
+          //delete shape_d;
       }
-      if(type == "LINE"){
+      /*:if(type == "LINE"){
           cout <<"\033[41m"<< "LINE             " <<"\033[0m" << endl;
           CLine* shape = new CLine(STRING, type, pos);
           _lines.push_back(shape);
           line_cnt++;//_size_points++;
-          cout << line_cnt /*_size_points*/ << " Line(s) loaded" << endl;
+          cout << line_cnt /*_size_points << " Line(s) loaded" << endl;
           cout <<"-----------------"<<endl;
-      }
+      }*/
 
     }
     getline(infile, STRING);
   }
   infile.close();
-
-  _size_points = point_cnt;
-  _size_rectangles = rectangle_cnt;
-  _size_disks = disk_cnt;
-  _size_lines = line_cnt;
-  _size = point_cnt + rectangle_cnt + disk_cnt + line_cnt;// _size_points; // + ...;
   cout << _size << " shape(s) loaded" << endl;
   return true;
 }
 
-bool CDrawing::Draw(){//CImage* img){
-  for (int i = 0; i < _size_points; i++){
-    _points[i]->drawPoint(_img);
-    cout <<"point " << i+1 << " drawn" << endl;
-  }
-  for (int i = 0; i < _size_rectangles; i++){
-    _rectangles[i]->drawRectangle(_img);
-    cout <<"rectangle " << i+1 << " drawn" << endl;
-  }
-  for (int i = 0; i < _size_disks; i++){
-    _disks[i]->drawDisk(_img);
-    cout <<"disk " << i+1 << " drawn" << endl;
-  }
-  for (int i = 0; i < _size_lines; i++){
-    _lines[i]->drawLine(_img);
-    cout <<"line " << i+1 << " drawn" << endl;
+void CDrawing::DrawShape(CImage* img, CShape* shape){
+  shape->draw(img);
+}
+
+
+bool CDrawing::DrawImage(){//CImage* img){
+  cout <<"Start Drawing" << endl;
+  for (int i = 0; i < _size; i++){
+    DrawShape(_img, _shapes[i]);
+    cout <<"shape " << i+1 << " " << _shapes[i]->_type << " drawn" << endl;
   }
   return true;
 }

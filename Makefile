@@ -11,6 +11,7 @@ SRC=./src/Format/CBitmap.cpp   \
     ./src/Image/CLigne.cpp     \
     ./src/Image/CPixel.cpp     \
 		./src/Shapes/CDrawing.cpp  \
+		./src/Shapes/CShape.cpp\
 		./src/Shapes/CPoint.cpp    \
 		./src/Shapes/CRectangle.cpp    \
 		./src/Shapes/CDisk.cpp    \
