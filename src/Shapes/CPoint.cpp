@@ -31,15 +31,8 @@ CPoint::CPoint(string command, string type, size_t pos1){
 CPoint::~CPoint(){
 }
 
-void CPoint::drawPoint(CImage* img){
-  CPixel *p = img->getPixel(_x, _y);
+void CPoint::draw(CImage* img){
   opacity(img);
+  CPixel *p = img->getPixel(_x, _y);
   p->RGB(  _red,  _green,  _blue);
-}
-
-void CPoint::opacity(CImage* img){
-  double opacity = (double)_opacity/100;
-  _red   = floor(opacity*_red   + (1-opacity)*img->r_backgnd);
-  _green = floor(opacity*_green + (1-opacity)*img->g_backgnd);
-  _blue  = floor(opacity*_blue  + (1-opacity)*img->b_backgnd);
 }
