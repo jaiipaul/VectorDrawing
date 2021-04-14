@@ -119,7 +119,7 @@ void CDisk::draw(CImage* img){
             y--;
           }
           else{
-            m = m + 2*(x - y - 1);
+            m = m + 2*(y - x - 1);
             y--;
             x++;
           }
