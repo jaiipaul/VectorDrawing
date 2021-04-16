@@ -49,55 +49,63 @@ void CLine::draw(CImage* img){
   int* x2;
   int* y2;
   int  tmp;
-  cout << "0" << endl;
+  cout << abs(_y2-_y1) <<" " << abs(_x2-_x1) <<endl;
   if (abs(_y2-_y1) > abs(_x2-_x1)){
-    /**x1 = _y1;
-    *y1 = _x1;
-    *x2 = _y2;
-    *y2 = _x2;*/
-    cout << "1" << endl;
+    x1 = &_y1;
+    y1 = &_x1;
+    x2 = &_y2;
+    y2 = &_x2;
   } else {
-    /**x1 = _x1;
-    *y1 = _y1;
-    *x2 = _x2;
-    *y2 = _y2;*/
-    cout << "2" << endl;
+    x1 = &_x1;
+    y1 = &_y1;
+    x2 = &_x2;
+    y2 = &_y2;
   }
-  if (x2 < x1) {
+  cout << *x1 <<" "<< *x2<<" " << *y1 <<" "<< *y2 <<  endl;
+  if (*x2 < *x1) {
     invert = 1;
     tmp = *x1;
-    x1 = x2;
+    *x1 = *x2;
     *x2 = tmp;
     tmp = *y1;
-    y1 = y2;
+    *y1 = *y2;
     *y2 = tmp;
-    cout << "3" << endl;
   }
   x = *x1;
+  cout << x << endl;
   y = *y1;
-  pente = (y2-y1)/(x2-x1);
-  p = (y2-y1)/(x2-x1);
+  cout << y << endl;
+  cout << *x1 <<" "<< *x2<<" " << *y1 <<" "<< *y2 <<  endl;
+  pente =(double)(*y2-*y1)/(double)(*x2-*x1);
+  cout << pente << endl;
+  p = 0;//(double)(*y2-*y1)/(double)(*x2-*x1);
+  cout << p << endl;
+  cout << invert << endl;
   for (int i=0; i<(*x2-*x1+1); i++){
-    x++;
-    if (pente > 0.5){
-      //p = (*y2-*y1)/(*x2-*x1);
-      if (pente < 0){
+
+
+    p = p + pente;
+    if (pente >= 0){
+      if (p >= 0.5){
         y++;
-      } else {
-        y--;
+        p = p -1;
+        cout << p << endl;
       }
-    } else {
-      p = p + pente;
     }
-    if (invert = 1) {
-      px = y;
-      py = x;
-    } else {
-      px = x;
-      py = y;
+    if (pente < 0){
+      if (p <= 0.5){
+        y--;
+        p = p + 1;
+        cout << p << endl;
+      }
     }
+    px = x;
+    py = y;
+    cout << px << "/"<< py << endl;
     CLigne* row = img->getLigne(py);
     CPixel* pix = row->getPixel(px);
     pix->RGB(_red, _green, _blue);
+    x++;
+
   }
 }
