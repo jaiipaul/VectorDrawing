@@ -4,6 +4,8 @@ CDrawing::CDrawing(int width, int height){
   cout <<"\033[33m" << "initializing drawing"<< "\033[0m" << endl;
   CreateImage(width, height);
   _size  = 0;
+  _maxX  = width;
+  _maxY  = height;
   _maxZ  = 0;
 }
 
@@ -11,14 +13,22 @@ CDrawing::CDrawing(int width, int height, int r, int g, int b){
   cout << "\033[33m"<< "Initializing drawing"<< "\033[0m" << endl;
   CreateImage(width, height, r, g, b);
   _size  = 0;
+  _maxX  = width;
+  _maxY  = height;
+  _maxZ  = 0;
+}
+
+CDrawing::CDrawing(){
+  cout <<"\033[33m" << "initializing drawing"<< "\033[0m" << endl;
+  _size  = 0;
+  _maxX  = 0;
+  _maxY  = 0;
   _maxZ  = 0;
 }
 
 CDrawing::~CDrawing(){
     for(int i=0; i<_size; i++)
         delete _shapes[i];
-
-    //delete _shapes;
     _shapes.clear();
 }
 
@@ -53,7 +63,9 @@ bool CDrawing::LoadDrawing(const string filename){
           cout <<"\033[44m"<< "POINT            " <<"\033[0m" << endl;
           CPoint* shape_p = new CPoint(STRING, type, pos);
           _shapes.push_back(shape_p);
-          _maxZ = _shapes[_size]->_z < _maxZ ? _maxZ : _shapes[_size]->_z;
+          _maxX = shape_p->_x < _maxX ? _maxX : shape_p->_x;
+          _maxY = shape_p->_y < _maxY ? _maxY : shape_p->_y;
+          _maxZ = shape_p->_z < _maxZ ? _maxZ : shape_p->_z;
           _size++;
           cout <<"-----------------"<<endl;
       }
@@ -61,7 +73,9 @@ bool CDrawing::LoadDrawing(const string filename){
           (type == "RECTANGLE_F")?cout <<"\033[45m"<< "RECTANGLE_F      " <<"\033[0m" << endl:cout <<"\033[45m"<< "RECTANGLE        " <<"\033[0m" << endl;
           CRectangle* shape_r = new CRectangle(STRING, type, pos);
           _shapes.push_back(shape_r);
-          _maxZ = _shapes[_size]->_z < _maxZ ? _maxZ : _shapes[_size]->_z;
+          _maxX = (shape_r->_x + shape_r->_length) < _maxX ? _maxX : (shape_r->_x + shape_r->_length);
+          _maxY = (shape_r->_y + shape_r->_height) < _maxY ? _maxY : (shape_r->_y + shape_r->_height);
+          _maxZ = shape_r->_z < _maxZ ? _maxZ : shape_r->_z;
           _size++;
           cout <<"-----------------"<<endl;
       }
@@ -69,7 +83,9 @@ bool CDrawing::LoadDrawing(const string filename){
           (type == "DISK_F")?cout <<"\033[42m"<< "DISK_F           " <<"\033[0m" << endl:cout <<"\033[42m"<< "DISK             " <<"\033[0m" << endl;
           CDisk* shape_d = new CDisk(STRING, type, pos);
           _shapes.push_back(shape_d);
-          _maxZ = _shapes[_size]->_z < _maxZ ? _maxZ : _shapes[_size]->_z;
+          _maxX = (shape_d->_x + shape_d->_radius) < _maxX ? _maxX : (shape_d->_x + shape_d->_radius);
+          _maxY = (shape_d->_y + shape_d->_radius) < _maxY ? _maxY : (shape_d->_y + shape_d->_radius);
+          _maxZ = shape_d->_z < _maxZ ? _maxZ : shape_d->_z;
           _size++;
           cout <<"-----------------"<<endl;
       }
@@ -77,7 +93,17 @@ bool CDrawing::LoadDrawing(const string filename){
           cout <<"\033[41m"<< "LINE             " <<"\033[0m" << endl;
           CLine* shape_l = new CLine(STRING, type, pos);
           _shapes.push_back(shape_l);
-          _maxZ = _shapes[_size]->_z < _maxZ ? _maxZ : _shapes[_size]->_z;
+          if(shape_l->_x1 < shape_l->_x2){
+            _maxX = shape_l->_x2 < _maxX ? _maxX : shape_l->_x2;
+          }else{
+            _maxX = shape_l->_x1 < _maxX ? _maxX : shape_l->_x1;
+          }
+          if(shape_l->_y1 < shape_l->_y2){
+            _maxY = shape_l->_y2 < _maxY ? _maxY : shape_l->_y2;
+          }else{
+            _maxY = shape_l->_y1 < _maxY ? _maxY : shape_l->_y1;
+          }
+          _maxZ = shape_l->_z < _maxZ ? _maxZ : shape_l->_z;
           _size++;
           cout <<"-----------------"<<endl;
       }
@@ -86,6 +112,8 @@ bool CDrawing::LoadDrawing(const string filename){
   }
   infile.close();
   cout << _size << " shape(s) loaded" << endl;
+  cout << "Max X : "<< _maxX << endl;
+  cout << "Max Y : "<< _maxY << endl;
   cout << "Max Z : "<< _maxZ << endl;
   return true;
 }

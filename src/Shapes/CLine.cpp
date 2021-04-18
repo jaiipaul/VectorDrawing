@@ -77,7 +77,7 @@ void CLine::draw(CImage* img){
   y = *y1;
   pente =(double)(*y2-*y1)/(double)(*x2-*x1);
   p = 0;//(double)(*y2-*y1)/(double)(*x2-*x1);
-  for (int i=0; i<(*x2-*x1+1); i++){
+  for (int i=0; i<(*x2-*x1); i++){
     p = p + pente;
     if (pente >= 0){
       if (p >= 0.5){

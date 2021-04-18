@@ -12,7 +12,7 @@ using namespace std;
 #define CDISK_H_
 
 class CDisk : public CShape{
-  private :
+  public :
     int    _x;
     int    _y;
     int    _radius;

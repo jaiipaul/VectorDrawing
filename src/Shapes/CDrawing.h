@@ -19,12 +19,16 @@ class CDrawing{
     vector<CShape*>  _shapes;
     //int             _selector;
     int             _size;
+    int             _maxX;
+    int             _maxY;
     int             _maxZ;
+
 
   public :
     //CShape(string type, string color, string opacity)
     CDrawing(int width, int height);
     CDrawing(int width, int height, int r, int g, int b);
+    CDrawing();
     ~CDrawing();
 
     bool CreateImage(int width, int height);

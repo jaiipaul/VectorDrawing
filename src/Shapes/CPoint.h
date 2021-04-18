@@ -12,7 +12,7 @@ using namespace std;
 #define CPOINT_H_
 
 class CPoint : public CShape{
-  private :
+  public :
     int    _x;
     int    _y;
 
