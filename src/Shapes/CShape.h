@@ -12,6 +12,7 @@ using namespace std;
 class CShape{
   public :
     string _type;
+    int    _z;
     int    _red;
     int    _green;
     int    _blue;

@@ -19,7 +19,7 @@ int main(int argc, char * argv[]) {
 
     cout << "(II) CImage pointer extraction" << endl;
     //CImage *img = new CImage(200,200);
-    CDrawing *Drawing = new CDrawing(400, 400, 255, 255, 255);
+    CDrawing *Drawing = new CDrawing(400, 400, 100, 255, 25);
     //cout<<"start loading drawing"<<endl;
     Drawing->LoadDrawing(argv[1]);
     Drawing->DrawImage();
