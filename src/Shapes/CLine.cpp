@@ -1,22 +1,22 @@
 #include "CLine.h"
 
-CLine::CLine(string command, string type, size_t pos1){
+CLine::CLine(string command, string type, size_t pos1, int scale){
   _type = type;
 
   size_t pos2 = command.find(",");
-  _x1          = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
+  _x1          = scale*atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
   cout << pos2 <<"_"<< _x1  << endl;
 
   pos1  = command.find(",", pos2+1);
-  _y1          = atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
+  _y1          = scale*atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
   cout << pos1 <<"_"<< _y1  << endl;
 
   pos2  = command.find(",", pos1+1);
-  _x2          = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
+  _x2          = scale*atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
   cout << pos2 <<"_"<< _x2  << endl;
 
   pos1  = command.find(",", pos2+1);
-  _y2          = atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
+  _y2          = scale*atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
   cout << pos1 <<"_"<< _y2  << endl;
 
   pos2  = command.find(",", pos1+1);

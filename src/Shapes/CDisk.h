@@ -18,7 +18,7 @@ class CDisk : public CShape{
     int    _radius;
 
   public :
-    CDisk(string command, string type, size_t pos1);
+    CDisk(string command, string type, size_t pos1, int scale);
     ~CDisk();
 
    void draw(CImage* img);

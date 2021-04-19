@@ -18,7 +18,7 @@ class CRectangle : public CShape{
     int    _height;
 
   public :
-    CRectangle(string command, string type, size_t pos1);
+    CRectangle(string command, string type, size_t pos1, int scale);
     ~CRectangle();
 
    void draw(CImage* img);

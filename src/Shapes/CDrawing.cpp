@@ -7,6 +7,7 @@ CDrawing::CDrawing(int width, int height){
   _maxX  = width;
   _maxY  = height;
   _maxZ  = 0;
+  _scale = 1;
 }
 
 CDrawing::CDrawing(int width, int height, int r, int g, int b){
@@ -16,14 +17,18 @@ CDrawing::CDrawing(int width, int height, int r, int g, int b){
   _maxX  = width;
   _maxY  = height;
   _maxZ  = 0;
+  _scale = 1;
+  cout << _scale << endl;
 }
 
-CDrawing::CDrawing(){
+CDrawing::CDrawing(int scale){
   cout <<"\033[33m" << "initializing drawing"<< "\033[0m" << endl;
   _size  = 0;
   _maxX  = 0;
   _maxY  = 0;
   _maxZ  = 0;
+  _scale = scale;
+  cout << _scale << endl;
 }
 
 CDrawing::~CDrawing(){
@@ -71,7 +76,7 @@ bool CDrawing::LoadDrawing(const string filename){
       }
       if(type == "RECTANGLE" || type == "RECTANGLE_F"){
           (type == "RECTANGLE_F")?cout <<"\033[45m"<< "RECTANGLE_F      " <<"\033[0m" << endl:cout <<"\033[45m"<< "RECTANGLE        " <<"\033[0m" << endl;
-          CRectangle* shape_r = new CRectangle(STRING, type, pos);
+          CRectangle* shape_r = new CRectangle(STRING, type, pos, _scale);
           _shapes.push_back(shape_r);
           _maxX = (shape_r->_x + shape_r->_length) < _maxX ? _maxX : (shape_r->_x + shape_r->_length);
           _maxY = (shape_r->_y + shape_r->_height) < _maxY ? _maxY : (shape_r->_y + shape_r->_height);
@@ -81,7 +86,7 @@ bool CDrawing::LoadDrawing(const string filename){
       }
       if(type == "DISK" || type == "DISK_F"){
           (type == "DISK_F")?cout <<"\033[42m"<< "DISK_F           " <<"\033[0m" << endl:cout <<"\033[42m"<< "DISK             " <<"\033[0m" << endl;
-          CDisk* shape_d = new CDisk(STRING, type, pos);
+          CDisk* shape_d = new CDisk(STRING, type, pos, _scale);
           _shapes.push_back(shape_d);
           _maxX = (shape_d->_x + shape_d->_radius) < _maxX ? _maxX : (shape_d->_x + shape_d->_radius);
           _maxY = (shape_d->_y + shape_d->_radius) < _maxY ? _maxY : (shape_d->_y + shape_d->_radius);
@@ -91,7 +96,7 @@ bool CDrawing::LoadDrawing(const string filename){
       }
       if(type == "LINE"){
           cout <<"\033[41m"<< "LINE             " <<"\033[0m" << endl;
-          CLine* shape_l = new CLine(STRING, type, pos);
+          CLine* shape_l = new CLine(STRING, type, pos, _scale);
           _shapes.push_back(shape_l);
           if(shape_l->_x1 < shape_l->_x2){
             _maxX = shape_l->_x2 < _maxX ? _maxX : shape_l->_x2;

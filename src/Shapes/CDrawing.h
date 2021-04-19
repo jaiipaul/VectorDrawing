@@ -22,13 +22,14 @@ class CDrawing{
     int             _maxX;
     int             _maxY;
     int             _maxZ;
+    int             _scale;
 
 
   public :
     //CShape(string type, string color, string opacity)
     CDrawing(int width, int height);
     CDrawing(int width, int height, int r, int g, int b);
-    CDrawing();
+    CDrawing(int scale);
     ~CDrawing();
 
     bool CreateImage(int width, int height);

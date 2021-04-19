@@ -1,18 +1,18 @@
 #include "CDisk.h"
 
-CDisk::CDisk(string command, string type, size_t pos1){
+CDisk::CDisk(string command, string type, size_t pos1, int scale){
   _type = type;
 
   size_t pos2 = command.find(",");
-  _x           = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
+  _x           = scale*atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
   cout << pos2 <<"_"<< _x  << endl;
 
   pos1     = command.find(",", pos2+1);
-  _y           = atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
+  _y           = scale*atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
   cout << pos1 <<"_"<< _y  << endl;
 
   pos2 = command.find(",", pos1+1);
-  _radius      = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
+  _radius      = scale*atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
   cout << pos2 <<"_"<< _radius  << endl;
 
   pos1     = command.find(",", pos2+1);

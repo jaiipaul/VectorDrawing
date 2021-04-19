@@ -19,7 +19,7 @@ class CLine : public CShape{
     int    _y2;
 
   public :
-    CLine(string command, string type, size_t pos1);
+    CLine(string command, string type, size_t pos1, int scale);
     ~CLine();
 
    void draw(CImage* img);
