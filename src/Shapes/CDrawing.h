@@ -15,9 +15,9 @@ using namespace std;
 
 class CDrawing{
   public :
+    string          _filename;
     CImage*         _img;
-    vector<CShape*>  _shapes;
-    //int             _selector;
+    vector<CShape*> _shapes;
     int             _size;
     int             _maxX;
     int             _maxY;
@@ -26,7 +26,7 @@ class CDrawing{
 
 
   public :
-    //CShape(string type, string color, string opacity)
+    CDrawing();
     CDrawing(int width, int height);
     CDrawing(int width, int height, int r, int g, int b);
     CDrawing(int scale);
@@ -34,7 +34,12 @@ class CDrawing{
 
     bool CreateImage(int width, int height);
     bool CreateImage(int width, int height, int r, int g, int b);
+    bool CreateShape(const string command);
     bool LoadDrawing(const string filename);
+    bool CreateDrawing(const string filename);
+    void showShapes();
+    void addShape(const string command);
+    void removeShape(int index);
     void DrawShape(CImage* img, CShape* shape);
     bool DrawImage();
 

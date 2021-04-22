@@ -43,8 +43,8 @@ void CDisk::draw(CImage* img){
   CShape::opacity(img);
   if (_type == "DISK"){
     int x = 0;
-    int y = _radius;
-    int m = 5 - 4*_radius;
+    int y = (_radius-1);
+    int m = 5 - 4*(_radius-1);
     while (x <= y){
         CLigne* row;
         CPixel* pix;
@@ -81,8 +81,8 @@ void CDisk::draw(CImage* img){
         m = m + 8*x + 4;
     }
   }
-  if ( _type == "DISK_F"){
-    for (int k=0;k<= _radius;k++){
+  if (_type == "DISK_F"){
+    for (int k=0;k < _radius;k++){
       int x = 0;
       int y = k;
       int m = k - 1;

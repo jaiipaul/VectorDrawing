@@ -1,0 +1,8 @@
+//Drawing file : dessin.vec which contains all data to draw the picture
+//PARAMETERS
+//SIZE
+//BACKGROUND
+//SCALE
+RECTANGLE_F : 0, 0, 20, 20, 0, 0, 0, 255, 100;
+
+
