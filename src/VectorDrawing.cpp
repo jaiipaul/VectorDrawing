@@ -215,6 +215,6 @@ int main(int argc, char * argv[]) {
     cout << " \033[0m |" << endl;
     cout << "#------------------------------#"<<endl;
 
-    MainMenu();
+    StartMenu();
     return 1;
 }

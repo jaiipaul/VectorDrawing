@@ -6,6 +6,6 @@
 #include "CPoint.h"
 #include "CRectangle.h"
 #include "CDisk.h"
-#include "Cline.h"
+#include "CLine.h"
 
 #endif /*CSHAPES_H_*/
