@@ -24,10 +24,6 @@ private:
     int taille;
 
 public:
-    int r_backgnd;
-    int g_backgnd;
-    int b_backgnd;
-
     CImage(int largeur, int hauteur);
     CImage(int largeur, int hauteur, int r, int g, int b);
     ~CImage();

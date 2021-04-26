@@ -46,15 +46,61 @@ CDrawing::~CDrawing(){
     _shapes.clear();
 }
 
-bool CDrawing::CreateImage(int width, int height){
-  _img = new CImage(width, height);
+bool CDrawing::CreateFile(const string filename){
+  ofstream outfile;
+  outfile.open(filename);
+  if (outfile.is_open() == false){
+    cout << "|!| Can't open file : " << filename << " ... " << endl;
+    return false;
+  }
+
+  outfile << "//Drawing file : " << filename << " which contains all data to draw the picture" << endl;
+  outfile << endl;
+  outfile << "//PARAMETERS : " << endl;
+  outfile << "//SIZE : " << endl;
+  outfile << "//BACKGROUND : " << endl;
+  outfile << "//SCALE : " << endl;
+  outfile << endl;
+  outfile << "//SHAPES : " << endl;
+  outfile.close();
+  return true;
+  }
+
+bool CDrawing::LoadDrawing(const string filename){
+  cout << ">>> Loading drawing" << endl;
+  string STRING;
+  ifstream infile;
+  infile.open(filename);
+  if (infile.is_open() == false){
+    cout << "|!| This file might not exist, can't find it..." << endl;
+    return false;
+  }
+  getline(infile, STRING);
+
+  while(not(infile.eof())){
+
+    if (STRING.substr(0,2) != "//"){
+      string header = STRING.substr(0,STRING.find(":")-1);
+      if(header == "POINT" || header == "LINE" || header == "DISK" || header == "DISK_F" || header == "RECTANGLE" || header == "RECTANGLE_F"){
+        CreateShape(STRING);
+      }else if(header == "SIZE"){
+        SetSize(STRING);
+      }else if(header == "BACKGROUND"){
+        SetBackgnd(STRING);
+      }else if(header == "SCALE"){
+        SetScale(STRING);
+      }
+    }
+    getline(infile, STRING);
+  }
+  infile.close();
+  cout << _size << " shape(s) loaded" << endl;
+  cout << "Max X : "<< _maxX << endl;
+  cout << "Max Y : "<< _maxY << endl;
+  cout << "Max Z : "<< _maxZ << endl;
   return true;
 }
 
-bool CDrawing::CreateImage(int width, int height, int r, int g, int b){
-  _img = new CImage(width, height, r, g, b);
-  return true;
-}
 
 bool CDrawing::CreateShape(const string command){
     size_t pos = command.find(":");
@@ -109,47 +155,6 @@ bool CDrawing::CreateShape(const string command){
     }
     return true;
   }
-
-
-bool CDrawing::LoadDrawing(const string filename){
-  cout << ">>> Loading drawing" << endl;
-  string STRING;
-  ifstream infile;
-  infile.open(filename);
-  if (infile.is_open() == false){
-    exit(EXIT_FAILURE);
-  }
-  getline(infile, STRING);
-
-  while(not(infile.eof())){
-
-    if (STRING.substr(0,2) != "//"){
-      CreateShape(STRING);
-    }
-    getline(infile, STRING);
-  }
-  infile.close();
-  cout << _size << " shape(s) loaded" << endl;
-  cout << "Max X : "<< _maxX << endl;
-  cout << "Max Y : "<< _maxY << endl;
-  cout << "Max Z : "<< _maxZ << endl;
-  return true;
-}
-
-bool CDrawing::CreateDrawing(const string filename){
-  ofstream outfile;
-  outfile.open(filename);
-  if (outfile.is_open() == false)
-    exit(EXIT_FAILURE);
-
-  outfile << "//Drawing file : " << filename << " which contains all data to draw the picture" << endl;
-  outfile << "//PARAMETERS" << endl;
-  outfile << "//SIZE" << endl;
-  outfile << "//BACKGROUND" << endl;
-  outfile << "//SCALE" << endl;;
-  outfile.close();
-  return true;
-}
 
 void CDrawing::showShapes(){
   for(int i = 0; i < _size; i++){
@@ -211,26 +216,33 @@ void CDrawing::removeShape(int index){
   outfile.close();
 
   _shapes.erase(_shapes.begin()+index-1);
-  /*for (int i = index-1; i < _size-1; i++){
-    _shapes[i] = _shapes[i+1];
-  }*/
   _size--;
 }
 
-int CDrawing::MaxZ(){
+/*int CDrawing::MaxZ(){
   int max = _shapes[0]->_z;
   for(int i = 0; i < _size; i++){
     max = _shapes[i]->_z < max ? max : _shapes[i]->_z;
   }
   return max;
-}
+}*/
 
 void CDrawing::DrawShape(CImage* img, CShape* shape){
   shape->draw(img);
 }
 
 
-bool CDrawing::DrawImage(){//CImage* img){
+bool CDrawing::CreateImage(int width, int height){
+  _img = new CImage(width, height);
+  return true;
+}
+
+bool CDrawing::CreateImage(int width, int height, int r, int g, int b){
+  _img = new CImage(width, height, r, g, b);
+  return true;
+}
+
+bool CDrawing::DrawImage(){
   cout <<"Start Drawing" << endl;
   for (int z = 0; z <= _maxZ; z++){
     cout << "Plan Z = " << z << endl;
@@ -241,5 +253,160 @@ bool CDrawing::DrawImage(){//CImage* img){
       }
     }
   }
+  return true;
+}
+
+bool CDrawing::SetSize(const string command){
+  size_t pos1 = command.find(":");
+  cout << pos1 << endl;
+  string STRING;
+  ifstream infile;
+  infile.open(_filename);
+  ofstream outfile;
+  outfile.open(_filename+".temp", fstream::trunc);
+
+  while(not(infile.eof())){
+    getline(infile,STRING);
+    if (STRING.substr(0,STRING.find(":")-1) != "//SIZE" || STRING.substr(0,STRING.find(":")-1) != "SIZE" ){
+      outfile << STRING << endl;
+    }else{
+      outfile << endl;
+      outfile << "//SIZE : ";
+    }
+  }
+  infile.close();
+  outfile.close();
+
+  infile.open(_filename+".temp");
+  outfile.open(_filename);
+  if (infile.is_open() == false)
+    exit(EXIT_FAILURE);
+  if (outfile.is_open() == false)
+    exit(EXIT_FAILURE);
+
+  while (not(infile.eof())){
+    getline(infile, STRING);
+    if (STRING.substr(0,STRING.find(":")-1) == "//SIZE")
+      outfile << "//" << command << endl;
+    else if(STRING.substr(0,STRING.find(":")-1) == "SIZE")
+      outfile << command << endl;
+    else
+      outfile << STRING << endl;
+  }
+
+  size_t pos2 = command.find(",");
+  _maxX = (command.substr(pos1+2, pos2-(pos1+2)) != "#") ? atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str()) : _maxX;
+
+  pos1     = command.find(";", pos2+1);
+  _maxY = (command.substr(pos2+2, pos1-(pos2+2)) != "#") ? atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str()) : _maxY;
+
+  cout << "Size set at X : ";
+  cout << _maxX;
+  cout << " / Y : ";
+  cout << _maxY << endl;
+
+  return true;
+}
+
+bool CDrawing::SetBackgnd(const string command){
+  size_t pos1 = command.find(":");
+
+  string STRING;
+  ifstream infile;
+  infile.open(_filename);
+  ofstream outfile;
+  outfile.open(_filename+".temp", fstream::trunc);
+
+  while(not(infile.eof())){
+    getline(infile,STRING);
+    if (STRING.substr(0,STRING.find(":")-1) != "//BACKGROUND" || STRING.substr(0,STRING.find(":")-1) != "BACKGROUND" ){
+      outfile << STRING << endl;
+    }else{
+      outfile << endl;
+      outfile << "//BACKGROUND : ";
+    }
+  }
+  infile.close();
+  outfile.close();
+
+  infile.open(_filename+".temp");
+  outfile.open(_filename);
+  if (infile.is_open() == false)
+    exit(EXIT_FAILURE);
+  if (outfile.is_open() == false)
+    exit(EXIT_FAILURE);
+
+  while (not(infile.eof())){
+    getline(infile, STRING);
+    if (STRING.substr(0,STRING.find(":")-1) == "//BACKGROUND")
+      outfile << "//" << command << endl;
+    else if(STRING.substr(0,STRING.find(":")-1) == "BACKGROUND")
+      outfile << command << endl;
+    else
+      outfile << STRING << endl;
+  }
+
+  size_t pos2 = command.find(",");
+  _r_backgnd = (command.substr(pos1+2, pos2-(pos1+2)) != "#") ? atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str()) : _r_backgnd;
+
+  pos1     = command.find(",", pos2+1);
+  _g_backgnd = (command.substr(pos2+2, pos1-(pos2+2)) != "#") ? atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str()) : _g_backgnd;
+
+  pos2  = command.find(";", pos1+1);
+  _b_backgnd = (command.substr(pos1+2, pos2-(pos1+2)) != "#") ? atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str()) : _b_backgnd;
+
+  cout << "Background set at RED : ";
+  cout << _r_backgnd;
+  cout << " / GREEN : ";
+  cout << _g_backgnd;
+  cout << " / BLUE : ";
+  cout << _b_backgnd << endl;
+
+  return true;
+}
+
+bool CDrawing::SetScale(const string command){
+  size_t pos1 = command.find(":");
+
+  string STRING;
+  ifstream infile;
+  infile.open(_filename);
+  ofstream outfile;
+  outfile.open(_filename+".temp", fstream::trunc);
+
+  while(not(infile.eof())){
+    getline(infile,STRING);
+    if (STRING.substr(0,STRING.find(":")-1) != "//SCALE" || STRING.substr(0,STRING.find(":")-1) != "SCALE" ){
+      outfile << STRING << endl;
+    }else{
+      outfile << endl;
+      outfile << "//SCALE : ";
+    }
+  }
+  infile.close();
+  outfile.close();
+
+  infile.open(_filename+".temp");
+  outfile.open(_filename);
+  if (infile.is_open() == false)
+    exit(EXIT_FAILURE);
+  if (outfile.is_open() == false)
+    exit(EXIT_FAILURE);
+
+  while (not(infile.eof())){
+    getline(infile, STRING);
+    if (STRING.substr(0,STRING.find(":")-1) == "//SCALE")
+      outfile << "//" << command << endl;
+    else if(STRING.substr(0,STRING.find(":")-1) == "SCALE")
+      outfile << command << endl;
+    else
+      outfile << STRING << endl;
+  }
+
+  size_t pos2 = command.find(";");
+  _scale = (command.substr(pos1+2, pos2-(pos1+2)) != "#") ? atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str()) : _scale;
+  cout << "Scale set at : ";
+  cout << _scale << endl;
+
   return true;
 }

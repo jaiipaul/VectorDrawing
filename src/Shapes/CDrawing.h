@@ -22,30 +22,45 @@ class CDrawing{
     int             _maxX;
     int             _maxY;
     int             _maxZ;
+    int             _r_backgnd;
+    int             _g_backgnd;
+    int             _b_backgnd;
     int             _scale;
 
 
   public :
+  //Constructors
     CDrawing();
     CDrawing(int width, int height);
     CDrawing(int width, int height, int r, int g, int b);
     CDrawing(int scale);
+  //Destructor
     ~CDrawing();
 
-    bool CreateImage(int width, int height);
-    bool CreateImage(int width, int height, int r, int g, int b);
-    bool CreateShape(const string command);
+  //File
+    bool CreateFile(const string filename);
     bool LoadDrawing(const string filename);
-    bool CreateDrawing(const string filename);
+
+  //Shapes
+    bool CreateShape(const string command);
     void showShapes();
     void addShape(const string command);
     void removeShape(int index);
     void DrawShape(CImage* img, CShape* shape);
+
+  //Image
+    bool CreateImage(int width, int height);
+    bool CreateImage(int width, int height, int r, int g, int b);
     bool DrawImage();
 
+  //Properties
+    bool SetSize(const string command);
+    bool SetBackgnd(const string command);
+    bool SetScale(const string command);
+
     //Z Plan
-    int  MaxZ();
-    void SortZ();
+    //int  MaxZ();
+    //void SortZ();
 
 };
 #endif /*CSHAPE_H_*/

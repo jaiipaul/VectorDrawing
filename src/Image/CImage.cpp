@@ -11,9 +11,6 @@
 
 CImage::CImage(int largeur, int hauteur){
     //cout << "Instanciation des lignes... " << taille << endl;
-    r_backgnd = 255;
-    g_backgnd = 255;
-    b_backgnd = 255;
     taille = hauteur;
     liste = (CLigne**)new CLigne**[taille];
     for(int i=0; i<taille; i++){
@@ -23,13 +20,10 @@ CImage::CImage(int largeur, int hauteur){
 
 CImage::CImage(int largeur, int hauteur, int r, int g, int b){
     //cout << "Instanciation des lignes... " << taille << endl;
-    r_backgnd = r;
-    g_backgnd = g;
-    b_backgnd = b;
     taille = hauteur;
     liste = (CLigne**)new CLigne**[taille];
     for(int i=0; i<taille; i++){
-        liste[i] = new CLigne(largeur, r_backgnd, g_backgnd, b_backgnd);
+        liste[i] = new CLigne(largeur, r, g, b);
     }
 }
 
