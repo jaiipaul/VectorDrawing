@@ -54,13 +54,18 @@ class CDrawing{
     bool DrawImage();
 
   //Properties
+    bool XBorder();
+    bool YBorder();
+    bool ZBorder();
     bool SetSize(const string command);
+    bool ResetSize();
     bool SetBackgnd(const string command);
+    bool ResetBackgnd();
     bool SetScale(const string command);
+    bool ResetScale();
 
-    //Z Plan
-    //int  MaxZ();
-    //void SortZ();
-
+    bool ParameterStatus(string parameter);
+    bool SetParameter(string parameter, string option);
+    bool WriteParameter(string parameter, string command);
 };
 #endif /*CSHAPE_H_*/

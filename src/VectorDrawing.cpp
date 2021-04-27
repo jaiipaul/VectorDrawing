@@ -16,10 +16,10 @@ void Draw(CDrawing *Drawing){
   CBitmap *image = new CBitmap();
 
   string filename2 = Drawing->_filename.substr(0, Drawing->_filename.find(".")) + ".bmp";
-  remove(filename2.c_str());
+  //remove(filename2.c_str());
   cout << "(II) CImage pointer extraction" << endl;
   //if(Drawing->_img != NULL){
-  delete Drawing->_img;
+  //delete Drawing->_img;
   //}
   Drawing->CreateImage(Drawing->_maxX, Drawing->_maxY, Drawing->_r_backgnd, Drawing->_g_backgnd, Drawing->_b_backgnd);
   Drawing->DrawImage();
@@ -148,86 +148,6 @@ int ShapesMenu(CDrawing *Drawing){
   }
 }
 
-int ParameterStatus(string option, string filename){
-  int status = 0;
-  ifstream infile;
-  infile.open(filename);
-  ofstream outfile;
-  outfile.open(filename+".temp", fstream::trunc);
-  string STRING;
-  while(not(infile.eof())){
-    getline(infile, STRING);
-    outfile << STRING << endl;
-    if (STRING.substr(0, STRING.find(":")-1) == "//"+option){
-      status = 0;
-    }else if(STRING.substr(0, STRING.find(":")-1) == option){
-      status = 1;
-    }
-  }
-  infile.close();
-  outfile.close();
-  return status;
-}
-
-int ParameterMenu(string option, string filename){
-  int status;
-  while(1){
-    status = ParameterStatus(option, filename);
-    string option2;
-    cout << "\033[41m";
-    cout << " \033[42m\033[30mV";
-    cout << "\033[43mD";
-    cout << "\033[44m";
-    cout << " \033[0m>>> ";
-    cout << filename.substr(0, filename.find("."));
-    cout << " >> EDIT >> " << option << " >> ";
-
-    if(status == 1){
-      cout << " | \033[42m\033[30m ON \033[0m";
-    }else if(status == 0){
-      cout << " | \033[41m\033[30m OFF \033[0m";
-    }
-    cout << " | \033[47m\033[30m SET \033[0m";
-    cout << " | \033[43m\033[30m BACK \033[0m" << endl;
-
-    cin >> option2;
-    if (option2 == "ON" || option2 == "OFF"){
-      cout << "Changing parameter status" << endl;
-      ifstream infile;
-      ofstream outfile;
-      infile.open(filename+".temp");
-      outfile.open(filename);
-      if (infile.is_open() == false)
-        exit(EXIT_FAILURE);
-      if (outfile.is_open() == false)
-        exit(EXIT_FAILURE);
-
-      string STRING;
-      while (not(infile.eof())){
-        getline(infile, STRING);
-        if ((option2 == "ON")&&(STRING.substr(0,STRING.find(":")-1) == "//"+option)){
-          outfile << STRING.substr(2, STRING.size()-2) << endl;
-          status = 1;
-          cout << "Set " << option << " ON" << endl;
-        }else if((option2 == "OFF")&&(STRING.substr(0,STRING.find(":")-1) == option)){
-          outfile << "//"<< STRING << endl;
-          status = 0;
-          cout << "Set " << option << " OFF" << endl;
-        }else{
-          outfile << STRING << endl;
-        }
-      }
-      infile.close();
-      outfile.close();
-    }else if( option2 == "SET"){
-      return 0;
-    }else if( option2 == "BACK"){
-      return 1;
-    }
-  }
- return 0;
-}
-
 string ParameterCommand(string parameter){
   string command;
   string param;
@@ -260,6 +180,40 @@ string ParameterCommand(string parameter){
   return command;
 }
 
+int ParameterMenu(CDrawing* Drawing, string option){
+  bool status;
+  while(1){
+    status = Drawing->ParameterStatus(option);
+    string option2;
+    cout << "\033[41m";
+    cout << " \033[42m\033[30mV";
+    cout << "\033[43mD";
+    cout << "\033[44m";
+    cout << " \033[0m>>> ";
+    cout << Drawing->_filename.substr(0, Drawing->_filename.find("."));
+    cout << " >> EDIT >> " << option << " >> ";
+
+    if(status == true){
+      cout << " | \033[42m\033[30m ON \033[0m";
+    }else if(status == false){
+      cout << " | \033[41m\033[30m OFF \033[0m";
+    }
+    cout << " | \033[47m\033[30m SET \033[0m";
+    cout << " | \033[43m\033[30m BACK \033[0m" << endl;
+
+    cin >> option2;
+    if (option2 == "ON" || option2 == "OFF"){
+      status = Drawing->SetParameter(option, option2);
+    }else if( option2 == "SET"){
+      string command = ParameterCommand(option);
+      Drawing->WriteParameter(option, command);
+    }else if( option2 == "BACK"){
+      return 0;
+    }
+  }
+  remove((Drawing->_filename+".temp").c_str());
+  return 0;
+}
 
 int EditMenu(CDrawing *Drawing){
   string option;
@@ -277,31 +231,9 @@ int EditMenu(CDrawing *Drawing){
     cout << " | \033[43m\033[30m BACK \033[0m" << endl;
 
     cin >> option;
-    if( option == "SIZE"){
-      //int out;
-      //out = ParameterMenu(option, Drawing->_filename);
-      if (ParameterMenu(option, Drawing->_filename) == 0){
-        string command = ParameterCommand(option);
-        Drawing->SetSize(command);
-      }else{}
-    }
-    else if( option == "BACKGROUND"){
-      //int out;
-      //out = ;
-      if (ParameterMenu(option, Drawing->_filename) == 0){
-        string command = ParameterCommand(option);
-        Drawing->SetBackgnd(command);
-      }else{}
-    }
-    else if( option == "SCALE"){
-      int out;
-      out = ParameterMenu(option, Drawing->_filename);
-      if (out = 0){
-        string command = ParameterCommand(option);
-        Drawing->SetBackgnd(command);
-      }else{}
-    }
-    else if( option == "BACK"){
+    if(option == "SIZE" || option == "BACKGROUND" || option == "SCALE"){
+      ParameterMenu(Drawing, option);
+    }else if( option == "BACK"){
       return 0;
     }
   }

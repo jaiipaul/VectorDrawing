@@ -30,6 +30,9 @@ CPoint::CPoint(string command, string type, size_t pos1){
   pos2  = command.find(";", pos1+1);
   _opacity     = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
   cout << " / OPACITY : " << _opacity << endl;
+
+  _Xsize = _x;
+  _Ysize = _y;
 }
 
 CPoint::~CPoint(){

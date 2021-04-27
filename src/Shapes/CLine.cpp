@@ -38,6 +38,9 @@ CLine::CLine(string command, string type, size_t pos1, int scale){
   pos2  = command.find(";", pos1+1);
   _opacity     = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
   cout << " / OPACITY : " << _opacity << endl;
+
+  _Xsize = (_x1 > _x2) ? _x1 : _x2;
+  _Ysize = (_y1 > _y2) ? _y1 : _y2;
 }
 
 CLine::~CLine(){
