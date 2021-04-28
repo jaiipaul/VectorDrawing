@@ -10,10 +10,18 @@ void CShape::draw(CImage* img){
   cout << "nothing to draw" << endl;
 }
 
-void CShape::opacity(CImage* img){
+int CShape::opacityR(CImage* img){
   double opacity = (double)_opacity/100;
-  _red   = floor(opacity*_red   + (1-opacity)*img->r_backgnd);
-  _green = floor(opacity*_green + (1-opacity)*img->g_backgnd);
-  _blue  = floor(opacity*_blue  + (1-opacity)*img->b_backgnd);
-  //cout << _red << "/" << _green << "/" << _blue << endl;
+  return(floor(opacity*_red   + (1-opacity)*img->r_backgnd));
+
+}
+
+int CShape::opacityG(CImage* img){
+  double opacity = (double)_opacity/100;
+  return(floor(opacity*_green + (1-opacity)*img->g_backgnd));
+}
+
+int CShape::opacityB(CImage* img){
+  double opacity = (double)_opacity/100;
+  return(floor(opacity*_blue  + (1-opacity)*img->b_backgnd));
 }

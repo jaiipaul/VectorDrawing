@@ -22,6 +22,10 @@ class CImage{
 private:
     CLigne** liste;
     int taille;
+public:
+    int r_backgnd;
+    int g_backgnd;
+    int b_backgnd;
 
 public:
     CImage(int largeur, int hauteur);

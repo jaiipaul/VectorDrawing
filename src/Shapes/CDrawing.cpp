@@ -1,5 +1,5 @@
 #include "CDrawing.h"
-
+//CONSTRUCTORS------------------------------------------------------------------
 CDrawing::CDrawing(int width, int height){
   cout <<"\033[33m" << "initializing drawing"<< "\033[0m" << endl;
   CreateImage(width, height);
@@ -9,7 +9,7 @@ CDrawing::CDrawing(int width, int height){
   _maxZ  = 0;
   _scale = 1;
 }
-
+//------------------------------------------------------------------------------
 CDrawing::CDrawing(int width, int height, int r, int g, int b){
   cout << "\033[33m"<< "Initializing drawing"<< "\033[0m" << endl;
   CreateImage(width, height, r, g, b);
@@ -18,9 +18,8 @@ CDrawing::CDrawing(int width, int height, int r, int g, int b){
   _maxY  = height;
   _maxZ  = 0;
   _scale = 1;
-  //cout << _scale << endl;
 }
-
+//------------------------------------------------------------------------------
 CDrawing::CDrawing(int scale){
   cout <<"\033[33m" << "initializing drawing"<< "\033[0m" << endl;
   _size  = 0;
@@ -28,24 +27,22 @@ CDrawing::CDrawing(int scale){
   _maxY  = 0;
   _maxZ  = 0;
   _scale = scale;
-  //cout << _scale << endl;
 }
-
+//------------------------------------------------------------------------------
 CDrawing::CDrawing(){
-  //cout <<"\033[33m" << "initializing drawing"<< "\033[0m" << endl;
   _size  = 0;
   _maxX  = 0;
   _maxY  = 0;
   _maxZ  = 0;
   _scale = 1;
-
 }
+//DESTRUCTOR--------------------------------------------------------------------
 CDrawing::~CDrawing(){
     for(int i=0; i<_size; i++)
         delete _shapes[i];
     _shapes.clear();
 }
-
+//FILE--------------------------------------------------------------------------
 bool CDrawing::CreateFile(const string filename){
   ofstream outfile;
   outfile.open(filename);
@@ -104,8 +101,7 @@ bool CDrawing::LoadDrawing(const string filename){
   cout << "Max Z : "<< _maxZ << endl;
   return true;
 }
-
-
+//SHAPES------------------------------------------------------------------------
 bool CDrawing::CreateShape(const string command){
     size_t pos = command.find(":");
     string type = command.substr(0,pos-1);
@@ -139,13 +135,13 @@ bool CDrawing::CreateShape(const string command){
     }
     return true;
   }
-
+//------------------------------------------------------------------------------
 void CDrawing::showShapes(){
   for(int i = 0; i < _size; i++){
     cout << "[" << i+1 << "]" << _shapes[i]->_type << " | X : " << _shapes[i]->_Xsize << " | Y : " << _shapes[i]->_Ysize << endl;
   }
 }
-
+//------------------------------------------------------------------------------
 void CDrawing::addShape(const string command){
   ofstream outfile;
   outfile.open(_filename, std::ofstream::app);
@@ -157,7 +153,7 @@ void CDrawing::addShape(const string command){
 
   CreateShape(command);
 }
-
+//------------------------------------------------------------------------------
 void CDrawing::removeShape(int index){
   string STRING;
   ifstream infile;
@@ -202,24 +198,24 @@ void CDrawing::removeShape(int index){
   _shapes.erase(_shapes.begin()+index-1);
   _size--;
 }
-
+//------------------------------------------------------------------------------
 void CDrawing::DrawShape(CImage* img, CShape* shape){
   shape->draw(img);
 }
-
-
+//IMAGE-------------------------------------------------------------------------
 bool CDrawing::CreateImage(int width, int height){
   _img = new CImage(width, height);
   return true;
 }
-
+//------------------------------------------------------------------------------
 bool CDrawing::CreateImage(int width, int height, int r, int g, int b){
   _img = new CImage(width, height, r, g, b);
   return true;
 }
-
+//------------------------------------------------------------------------------
 bool CDrawing::DrawImage(){
   cout <<"Start Drawing" << endl;
+  ZBorder();
   for (int z = 0; z <= _maxZ; z++){
     cout << "Plan Z = " << z << endl;
     for (int i = 0; i < _size; i++){
@@ -231,28 +227,28 @@ bool CDrawing::DrawImage(){
   }
   return true;
 }
-
+//PROPERTIES--------------------------------------------------------------------
 bool CDrawing::XBorder(){
   for(int i = 0; i < _size; i++){
     _maxX = _shapes[i]->_Xsize < _maxX ? _maxX : _shapes[i]->_Xsize;
   }
   return true;
 }
-
+//------------------------------------------------------------------------------
 bool CDrawing::YBorder(){
   for(int i = 0; i < _size; i++){
     _maxY = _shapes[i]->_Ysize < _maxY ? _maxY : _shapes[i]->_Ysize;
   }
   return true;
 }
-
+//------------------------------------------------------------------------------
 bool CDrawing::ZBorder(){
   for(int i = 0; i < _size; i++){
     _maxZ = _shapes[i]->_z < _maxZ ? _maxZ : _shapes[i]->_z;
   }
   return true;
 }
-
+//------------------------------------------------------------------------------
 bool CDrawing::SetSize(const string command){
   size_t pos1 = command.find(":");
   size_t pos2 = command.find(",");
@@ -268,7 +264,7 @@ bool CDrawing::SetSize(const string command){
 
   return true;
 }
-
+//------------------------------------------------------------------------------
 bool CDrawing::ResetSize(){
   _maxX = 0;
   _maxY = 0;
@@ -276,7 +272,7 @@ bool CDrawing::ResetSize(){
   YBorder();
   return true;
 }
-
+//------------------------------------------------------------------------------
 bool CDrawing::SetBackgnd(const string command){
   size_t pos1 = command.find(":");
   size_t pos2 = command.find(",");
@@ -297,14 +293,14 @@ bool CDrawing::SetBackgnd(const string command){
 
   return true;
 }
-
+//------------------------------------------------------------------------------
 bool CDrawing::ResetBackgnd(){
   _r_backgnd = 255;
   _g_backgnd = 255;
   _b_backgnd = 255;
   return true;
 }
-
+//------------------------------------------------------------------------------
 bool CDrawing::SetScale(const string command){
   size_t pos1 = command.find(":");
   size_t pos2 = command.find(";");
@@ -316,12 +312,13 @@ bool CDrawing::SetScale(const string command){
 
   return true;
 }
-
+//------------------------------------------------------------------------------
 bool CDrawing::ResetScale(){
   _scale = 1;
   return true;
 }
 
+//PARAMETERS--------------------------------------------------------------------
 bool CDrawing::ParameterStatus(string parameter){
   bool status = false;
   ifstream infile;
@@ -342,7 +339,7 @@ bool CDrawing::ParameterStatus(string parameter){
   outfile.close();
   return status;
 }
-
+//------------------------------------------------------------------------------
 bool CDrawing::SetParameter(string parameter, string option){
   bool status;
   cout << "Changing parameter status" << endl;
@@ -388,7 +385,7 @@ bool CDrawing::SetParameter(string parameter, string option){
   outfile.close();
   return status;
 }
-
+//------------------------------------------------------------------------------
 bool CDrawing::WriteParameter(string parameter, string command){
   string STRING;
   ifstream infile;
@@ -429,3 +426,4 @@ bool CDrawing::WriteParameter(string parameter, string command){
   }
   return true;
 }
+//------------------------------------------------------------------------------

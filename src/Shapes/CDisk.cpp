@@ -43,7 +43,9 @@ CDisk::~CDisk(){
 }
 
 void CDisk::draw(CImage* img){
-  CShape::opacity(img);
+  int red   = CShape::opacityR(img);
+  int green = CShape::opacityG(img);
+  int blue  = CShape::opacityB(img);
   if (_type == "DISK"){
     int x = 0;
     int y = (_radius-1);
@@ -54,27 +56,27 @@ void CDisk::draw(CImage* img){
 
         row = img->getLigne(_y + y);
         pix = row->getPixel(_x + x);
-        pix->RGB( _red, _green, _blue);
+        pix->RGB( red, green, blue);
         pix = row->getPixel(_x - x);
-        pix->RGB( _red, _green, _blue);
+        pix->RGB( red, green, blue);
 
         row = img->getLigne(_y + x);
         pix = row->getPixel(_x + y);
-        pix->RGB( _red, _green, _blue);
+        pix->RGB( red, green, blue);
         pix = row->getPixel(_x - y);
-        pix->RGB( _red, _green, _blue);
+        pix->RGB( red, green, blue);
 
         row = img->getLigne(_y - y);
         pix = row->getPixel(_x + x);
-        pix->RGB( _red, _green, _blue);
+        pix->RGB( red, green, blue);
         pix = row->getPixel(_x - x);
-        pix->RGB( _red, _green, _blue);
+        pix->RGB( red, green, blue);
 
         row = img->getLigne(_y - x);
         pix = row->getPixel(_x + y);
-        pix->RGB( _red, _green, _blue);
+        pix->RGB( red, green, blue);
         pix = row->getPixel(_x - y);
-        pix->RGB( _red, _green, _blue);
+        pix->RGB( red, green, blue);
 
         if(m > 0){
           y--;
@@ -95,27 +97,27 @@ void CDisk::draw(CImage* img){
 
           row = img->getLigne(_y + y);
           pix = row->getPixel(_x + x);
-          pix->RGB( _red, _green, _blue);
+          pix->RGB( red, green, blue);
           pix = row->getPixel(_x - x);
-          pix->RGB( _red, _green, _blue);
+          pix->RGB( red, green, blue);
 
           row = img->getLigne(_y + x);
           pix = row->getPixel(_x + y);
-          pix->RGB( _red, _green, _blue);
+          pix->RGB( red, green, blue);
           pix = row->getPixel(_x - y);
-          pix->RGB( _red, _green, _blue);
+          pix->RGB( red, green, blue);
 
           row = img->getLigne(_y - y);
           pix = row->getPixel(_x + x);
-          pix->RGB( _red, _green, _blue);
+          pix->RGB( red, green, blue);
           pix = row->getPixel(_x - x);
-          pix->RGB( _red, _green, _blue);
+          pix->RGB( red, green, blue);
 
           row = img->getLigne(_y - x);
           pix = row->getPixel(_x + y);
-          pix->RGB( _red, _green, _blue);
+          pix->RGB( red, green, blue);
           pix = row->getPixel(_x - y);
-          pix->RGB( _red, _green, _blue);
+          pix->RGB( red, green, blue);
 
           if(m >= 2*x){
             m = m - 2*x-1;

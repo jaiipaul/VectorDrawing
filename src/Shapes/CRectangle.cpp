@@ -47,20 +47,22 @@ CRectangle::~CRectangle(){
 }
 
 void CRectangle::draw(CImage* img){
-  CShape::opacity(img);
+  int red   = CShape::opacityR(img);
+  int green = CShape::opacityG(img);
+  int blue  = CShape::opacityB(img);
   if (_type == "RECTANGLE"){
     for(int ligne =0; ligne < _height; ligne++){
         CLigne* row = img->getLigne(_y + ligne);
         if (_y < ligne < _height){
           CPixel* p = row->getPixel(_x);
-          p->RGB(_red, _green, _blue);
+          p->RGB( red, green, blue);
           p = row->getPixel(_x + _length - 1);
-          p->RGB(_red, _green, _blue);
+          p->RGB( red, green, blue);
         }
         if(ligne == 0 || ligne == _height-1){
           for(int col = 0; col<_length; col++){
               CPixel* p = row->getPixel(_x + col);
-              p->RGB(_red, _green, _blue);
+              p->RGB( red, green, blue);
           }
         }
       }
@@ -70,7 +72,7 @@ void CRectangle::draw(CImage* img){
         CLigne* row = img->getLigne(_y + ligne);
         for(int col = 0; col<_length; col++){
             CPixel* p = row->getPixel(_x + col);
-            p->RGB(_red, _green, _blue);
+            p->RGB( red, green, blue);
         }
      }
   }
