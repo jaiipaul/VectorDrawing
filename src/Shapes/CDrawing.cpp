@@ -7,6 +7,9 @@ CDrawing::CDrawing(int width, int height){
   _maxX  = width;
   _maxY  = height;
   _maxZ  = 0;
+  _r_backgnd = 255;
+  _g_backgnd = 255;
+  _b_backgnd = 255;
   _scale = 1;
 }
 //------------------------------------------------------------------------------
@@ -17,6 +20,9 @@ CDrawing::CDrawing(int width, int height, int r, int g, int b){
   _maxX  = width;
   _maxY  = height;
   _maxZ  = 0;
+  _r_backgnd = r;
+  _g_backgnd = g;
+  _b_backgnd = b;
   _scale = 1;
 }
 //------------------------------------------------------------------------------
@@ -26,6 +32,9 @@ CDrawing::CDrawing(int scale){
   _maxX  = 0;
   _maxY  = 0;
   _maxZ  = 0;
+  _r_backgnd = 255;
+  _g_backgnd = 255;
+  _b_backgnd = 255;
   _scale = scale;
 }
 //------------------------------------------------------------------------------
@@ -34,6 +43,9 @@ CDrawing::CDrawing(){
   _maxX  = 0;
   _maxY  = 0;
   _maxZ  = 0;
+  _r_backgnd = 255;
+  _g_backgnd = 255;
+  _b_backgnd = 255;
   _scale = 1;
 }
 //DESTRUCTOR--------------------------------------------------------------------
@@ -99,6 +111,7 @@ bool CDrawing::LoadDrawing(const string filename){
   cout << "Max X : "<< _maxX << endl;
   cout << "Max Y : "<< _maxY << endl;
   cout << "Max Z : "<< _maxZ << endl;
+  cout << "Scale : "<< _scale <<endl;
   return true;
 }
 //SHAPES------------------------------------------------------------------------
