@@ -246,7 +246,6 @@ bool CDrawing::XBorder(){
   for(int i = 0; i < _size; i++){
     _maxX = _shapes[i]->_Xsize < _maxX ? _maxX : _shapes[i]->_Xsize;
   }
-  cout << _maxX << endl;
   return true;
 }
 //------------------------------------------------------------------------------
@@ -254,7 +253,6 @@ bool CDrawing::YBorder(){
   for(int i = 0; i < _size; i++){
     _maxY = _shapes[i]->_Ysize < _maxY ? _maxY : _shapes[i]->_Ysize;
   }
-  cout << _maxY << endl;
   return true;
 }
 //------------------------------------------------------------------------------
@@ -262,7 +260,6 @@ bool CDrawing::ZBorder(){
   for(int i = 0; i < _size; i++){
     _maxZ = _shapes[i]->_z < _maxZ ? _maxZ : _shapes[i]->_z;
   }
-  cout << _maxZ << endl;
   return true;
 }
 //------------------------------------------------------------------------------

@@ -46,5 +46,4 @@ void CPoint::draw(CImage* img){
     CPixel *p = img->getPixel(_x, _y);
     p->RGB( red, green, blue);
   }
-
 }
