@@ -32,7 +32,75 @@ void Info(CDrawing *Drawing){
     cout << "------------------------------" << endl;;
 }
 
-string newShapeCommand(){
+bool check_Xlocation(int x,  CDrawing* Drawing){
+  if(Drawing->ParameterStatus("SIZE") == true){
+    if (x <= Drawing->_maxX){
+      return true;
+    }else{
+      cout << "|!| X is out of image border...(maxY = " << Drawing->_maxX << " )" << endl;
+      return false;
+    }
+  }else{
+    return true;
+  }
+}
+
+bool check_Ylocation(int y,  CDrawing* Drawing){
+  if(Drawing->ParameterStatus("SIZE") == true){
+    if (y <= Drawing->_maxY){
+      return true;
+    }else{
+      cout << "|!| Y is out of image border... (maxY = " << Drawing->_maxY << " )" << endl;
+      return false;
+    }
+  }else{
+    return true;
+  }
+}
+
+bool check_width(int width, int x_pos,  CDrawing* Drawing){
+  if(Drawing->ParameterStatus("SIZE") == true){
+    if (x_pos + width <= Drawing->_maxX){
+      return true;
+    }else{
+      cout << "|!| Width too large... (max = " << Drawing->_maxX - x_pos << " )" << endl;
+      return false;
+    }
+  }else{
+    return true;
+  }
+}
+
+bool check_height(int width, int y_pos,  CDrawing* Drawing){
+  if(Drawing->ParameterStatus("SIZE") == true){
+    if (y_pos + width <= Drawing->_maxY){
+      return true;
+    }else{
+      cout << "|!| Heigth too large... (max = " << Drawing->_maxY - y_pos << " )" << endl;
+      return false;
+    }
+  }else{
+    return true;
+  }
+}
+
+bool check_radius(int radius, int x_pos, int y_pos,  CDrawing* Drawing){
+  if(Drawing->ParameterStatus("SIZE") == true){
+    if (x_pos + radius > Drawing->_maxX){
+      cout << "|!| Radius too large... (max = " << Drawing->_maxX - x_pos << " )" << endl;
+      return false;
+    }else if(y_pos + radius > Drawing->_maxY){
+      cout << "|!| Radius too large... (max = " << Drawing->_maxY - y_pos << " )" << endl;
+      return false;
+    }else{
+      return true;
+    }
+  }else{
+    return true;
+  }
+}
+
+string newShapeCommand(CDrawing *Drawing){
   string type;
   string red;
   string green;
@@ -58,10 +126,16 @@ string newShapeCommand(){
   cout << endl;
 
   cout << ">>> Choose location :" << endl;
-  cout << " > X = ";
-  cin  >> x;
-  cout << " > Y = ";
-  cin  >> y;
+  //do {
+    cout << " > X = ";
+    cin  >> x;
+  //} while(check_Xlocation(stoi(x), Drawing) == false);
+
+  //do {
+    cout << " > Y = ";
+    cin  >> y;
+  //} while(check_Ylocation(stoi(y), Drawing) == false);
+
   cout << " > Z = ";
   cin  >> z;
   cout << endl;
@@ -73,28 +147,38 @@ string newShapeCommand(){
   else if(type == "RECTANGLE" || type == "RECTANGLE_F"){
     string width, height;
     cout << ">>> Choose parameters : " << endl;
-    cout << " > WIDTH : ";
-    cin  >> width;
-    cout << " > HEIGHT : ";
-    cin  >> height;
+    //do {
+      cout << " > WIDTH = ";
+      cin  >> width;
+    //} while(check_width(stoi(width), stoi(x), Drawing) == false);
+    //do {
+      cout << " > HEIGHT = ";
+      cin  >> height;
+    //} while(check_height(stoi(height), stoi(y), Drawing) == false);
     cout << endl;
     command = type+" : "+x+", "+y+", "+width+", "+height+", "+z+", "+red+", "+green+", "+blue+", "+opacity+";";
   }
   else if(type == "DISK" || type == "DISK_F"){
     string radius;
     cout << ">>> Choose parameters : " << endl;
-    cout << " > RADIUS : ";
-    cin  >> radius;
+    //do {
+      cout << " > RADIUS = ";
+      cin  >> radius;
+    //} while(check_radius(stoi(radius), stoi(x), stoi(y), Drawing) == false);
     cout << endl;
     command = type+" : "+x+", "+y+", "+radius+", "+z+", "+red+", "+green+", "+blue+", "+opacity+";";
   }
   else if(type == "LINE"){
     string x2, y2;
     cout << ">>> Choose parameters : " << endl;
-    cout << " > X2 : ";
-    cin  >> x2;
-    cout << " > Y2 : ";
-    cin  >> y2;
+    //do{
+      cout << " > X2 = ";
+      cin  >> x2;
+    //} while(check_Xlocation(stoi(x2), Drawing) == false);
+    //do{
+      cout << " > Y2 = ";
+      cin  >> y2;
+    //} while(check_Ylocation(stoi(y2), Drawing) == false);
     cout << endl;
     command = type+" : "+x+", "+y+", "+x2+", "+y2+", "+z+", "+red+", "+green+", "+blue+", "+opacity+";";
   }

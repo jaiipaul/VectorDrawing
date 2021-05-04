@@ -58,10 +58,14 @@ class CDrawing{
     bool YBorder();
     bool ZBorder();
     bool SetSize(const string command);
+    bool SetSize(int x, int y);
+    bool UpdateSize();
     bool ResetSize();
     bool SetBackgnd(const string command);
+    bool SetBackgnd(int r, int g, int b);
     bool ResetBackgnd();
     bool SetScale(const string command);
+    bool SetScale(int scale);
     bool ResetScale();
 
     bool ParameterStatus(string parameter);

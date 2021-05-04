@@ -98,10 +98,14 @@ void CLine::draw(CImage* img){
     }
     px = x;
     py = y;
-    CLigne* row = img->getLigne(py);
-    CPixel* pix = row->getPixel(px);
-    pix->RGB(red, green, blue);
-    x++;
 
+    if(py < img->_hauteur){
+      CLigne* row = img->getLigne(py);
+      if(px < img->_largeur){
+        CPixel* pix = row->getPixel(px);
+        pix->RGB(red, green, blue);
+      }
+    }
+    x++;
   }
 }

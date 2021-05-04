@@ -11,10 +11,11 @@
 
 CImage::CImage(int largeur, int hauteur){
     //cout << "Instanciation des lignes... " << taille << endl;
-    taille = hauteur;
-    liste = (CLigne**)new CLigne**[taille];
-    for(int i=0; i<taille; i++){
-        liste[i] = new CLigne(largeur);
+    _hauteur = hauteur;
+    _largeur = largeur;
+    liste = (CLigne**)new CLigne**[_hauteur];
+    for(int i=0; i<_hauteur; i++){
+        liste[i] = new CLigne(_largeur);
     }
 }
 
@@ -23,28 +24,29 @@ CImage::CImage(int largeur, int hauteur, int r, int g, int b){
     r_backgnd = r;
     g_backgnd = g;
     b_backgnd = b;
-    taille = hauteur;
-    liste = (CLigne**)new CLigne**[taille];
-    for(int i=0; i<taille; i++){
-        liste[i] = new CLigne(largeur, r, g, b);
+    _hauteur = hauteur;
+    _largeur = largeur;
+    liste = (CLigne**)new CLigne**[_hauteur];
+    for(int i=0; i<_hauteur; i++){
+        liste[i] = new CLigne(_largeur, r, g, b);
     }
 }
 
 CImage::~CImage(){
-    for(int i=0; i<taille; i++)
+    for(int i=0; i<_hauteur; i++)
         delete liste[i];
     delete liste;
 }
 
 int CImage::size(){
-    return taille;
+    return _hauteur;
 }
 
 CLigne* CImage::getLigne(int position){
-    if( (position >= taille) ){
-        cout << "CImage::getLigne => trying to access " << position << " but the line has only " << taille << " data" << endl;
+    if( (position >= _hauteur) ){
+        cout << "CImage::getLigne => trying to access " << position << " but the line has only " << _hauteur << " data" << endl;
     }
-    return (position < taille)?liste[position]:NULL;
+    return (position < _hauteur)?liste[position]:NULL;
 }
 
 CPixel* CImage::getPixel(int posX, int posY){

@@ -18,7 +18,7 @@ int ShapesMenu(CDrawing *Drawing){
 
     cin >> option;
     if (option == "ADD"){
-      string command = newShapeCommand();
+      string command = newShapeCommand(Drawing);
       Drawing->addShape(command);
     }
     else if (option == "REMOVE"){
@@ -26,8 +26,12 @@ int ShapesMenu(CDrawing *Drawing){
       Drawing->showShapes();
       cout << ">>> Shape to remove (Index) : ";
       cin  >> index;
-      Drawing->removeShape(index);
-      cout << ">>> Shape n°" << index << " removed from drawing" << endl;
+      if(index <= Drawing->_size){
+        Drawing->removeShape(index);
+        cout << ">>> Shape n°" << index << " removed from drawing" << endl;
+      }else{
+        cout << "|!| There is no shape n°" << index << endl;
+      }
     }
     else if (option == "LIST"){
       Drawing->showShapes();

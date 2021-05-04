@@ -16,8 +16,13 @@ void Draw(CDrawing *Drawing);
 
 void Info(CDrawing *Drawing);
 
-string newShapeCommand();
+string newShapeCommand(CDrawing *Drawing);
 
 string ParameterCommand(string parameter);
 
+bool check_Xlocation(int x,  CDrawing* Drawing);
+bool check_Ylocation(int y,  CDrawing* Drawing);
+bool check_width(int width, int x_pos,  CDrawing* Drawing);
+bool check_height(int width, int y_pos,  CDrawing* Drawing);
+bool check_radius(int radius, int x_pos, int y_pos,  CDrawing* Drawing);
 #endif/*FUNCTIONS_H_*/

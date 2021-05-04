@@ -103,9 +103,7 @@ bool CDrawing::LoadDrawing(const string filename){
     getline(infile, STRING);
   }
   infile.close();
-  XBorder();
-  YBorder();
-  ZBorder();
+  UpdateSize();
 
   cout << _size << " shape(s) loaded" << endl;
   cout << "Max X : "<< _maxX << endl;
@@ -165,6 +163,7 @@ void CDrawing::addShape(const string command){
   outfile.close();
 
   CreateShape(command);
+  ResetSize();
 }
 //------------------------------------------------------------------------------
 void CDrawing::removeShape(int index){
@@ -210,6 +209,8 @@ void CDrawing::removeShape(int index){
   remove((_filename+".temp").c_str());
   _shapes.erase(_shapes.begin()+index-1);
   _size--;
+
+  ResetSize();
 }
 //------------------------------------------------------------------------------
 void CDrawing::DrawShape(CImage* img, CShape* shape){
@@ -245,6 +246,7 @@ bool CDrawing::XBorder(){
   for(int i = 0; i < _size; i++){
     _maxX = _shapes[i]->_Xsize < _maxX ? _maxX : _shapes[i]->_Xsize;
   }
+  cout << _maxX << endl;
   return true;
 }
 //------------------------------------------------------------------------------
@@ -252,6 +254,7 @@ bool CDrawing::YBorder(){
   for(int i = 0; i < _size; i++){
     _maxY = _shapes[i]->_Ysize < _maxY ? _maxY : _shapes[i]->_Ysize;
   }
+  cout << _maxY << endl;
   return true;
 }
 //------------------------------------------------------------------------------
@@ -259,6 +262,7 @@ bool CDrawing::ZBorder(){
   for(int i = 0; i < _size; i++){
     _maxZ = _shapes[i]->_z < _maxZ ? _maxZ : _shapes[i]->_z;
   }
+  cout << _maxZ << endl;
   return true;
 }
 //------------------------------------------------------------------------------
@@ -278,11 +282,36 @@ bool CDrawing::SetSize(const string command){
   return true;
 }
 //------------------------------------------------------------------------------
+bool CDrawing::SetSize(int x, int y){
+
+  _maxX = x;
+  _maxY = y;
+  cout << "Size set at X : ";
+  cout << _maxX;
+  cout << " / Y : ";
+  cout << _maxY << endl;
+
+  return true;
+}
+//------------------------------------------------------------------------------
+bool CDrawing::UpdateSize(){
+  ZBorder();
+  if(not(ParameterStatus("SIZE"))){
+    XBorder();
+    YBorder();
+    return true;
+  }else{
+    return true;
+  }
+}
+//------------------------------------------------------------------------------
 bool CDrawing::ResetSize(){
   _maxX = 0;
   _maxY = 0;
+  _maxZ = 0;
   XBorder();
   YBorder();
+  ZBorder();
   return true;
 }
 //------------------------------------------------------------------------------
@@ -307,6 +336,22 @@ bool CDrawing::SetBackgnd(const string command){
   return true;
 }
 //------------------------------------------------------------------------------
+bool CDrawing::SetBackgnd(int r, int g, int b){
+
+  _r_backgnd = r;
+  _g_backgnd = g;
+  _b_backgnd = b;
+
+  cout << "Background set at RED : ";
+  cout << _r_backgnd;
+  cout << " / GREEN : ";
+  cout << _g_backgnd;
+  cout << " / BLUE : ";
+  cout << _b_backgnd << endl;
+
+  return true;
+}
+//------------------------------------------------------------------------------
 bool CDrawing::ResetBackgnd(){
   _r_backgnd = 255;
   _g_backgnd = 255;
@@ -318,6 +363,17 @@ bool CDrawing::SetScale(const string command){
   size_t pos1 = command.find(":");
   size_t pos2 = command.find(";");
   _scale = (command.substr(pos1+2, pos2-(pos1+2)) != "#") ? atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str()) : _scale;
+  _maxX = _scale*_maxX;
+  _maxY = _scale*_maxY;
+  cout << "Scale set at : ";
+  cout << _scale << endl;
+
+  return true;
+}
+//------------------------------------------------------------------------------
+bool CDrawing::SetScale(int scale){
+
+  _scale = scale;
   _maxX = _scale*_maxX;
   _maxY = _scale*_maxY;
   cout << "Scale set at : ";
@@ -400,23 +456,25 @@ bool CDrawing::SetParameter(string parameter, string option){
 }
 //------------------------------------------------------------------------------
 bool CDrawing::WriteParameter(string parameter, string command){
+  bool is_param = false;
+  is_param = ParameterStatus(parameter);
   string STRING;
   ifstream infile;
   infile.open(_filename);
   ofstream outfile;
   outfile.open(_filename+".temp", fstream::trunc);
-  bool is_param = false;
+  outfile << "//"+parameter+" :" << endl;
   while(infile.peek() != EOF){
 
     getline(infile,STRING);
-    if (STRING.substr(0,STRING.find(":")-1) == "//"+parameter || STRING.substr(0,STRING.find(":")-1) == parameter ){
-      is_param = true;
-    }
+    //if (STRING.substr(0,STRING.find(":")-1) == "//"+parameter || STRING.substr(0,STRING.find(":")-1) == parameter ){
+      //is_param = true;
+    //}
     outfile << STRING << endl;
   }
-  if( is_param == false){
-    outfile << "//"+parameter+" :" << endl;
-  }
+  //if( is_param == false){
+    //outfile << "//"+parameter+" :" << endl;
+  //}
 
   infile.close();
   outfile.close();

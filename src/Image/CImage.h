@@ -21,8 +21,10 @@ using namespace std;
 class CImage{
 private:
     CLigne** liste;
-    int taille;
+
 public:
+    int _hauteur;
+    int _largeur;
     int r_backgnd;
     int g_backgnd;
     int b_backgnd;

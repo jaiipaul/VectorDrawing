@@ -54,29 +54,50 @@ void CDisk::draw(CImage* img){
         CLigne* row;
         CPixel* pix;
 
-        row = img->getLigne(_y + y);
-        pix = row->getPixel(_x + x);
-        pix->RGB( red, green, blue);
-        pix = row->getPixel(_x - x);
-        pix->RGB( red, green, blue);
-
-        row = img->getLigne(_y + x);
-        pix = row->getPixel(_x + y);
-        pix->RGB( red, green, blue);
-        pix = row->getPixel(_x - y);
-        pix->RGB( red, green, blue);
-
-        row = img->getLigne(_y - y);
-        pix = row->getPixel(_x + x);
-        pix->RGB( red, green, blue);
-        pix = row->getPixel(_x - x);
-        pix->RGB( red, green, blue);
-
-        row = img->getLigne(_y - x);
-        pix = row->getPixel(_x + y);
-        pix->RGB( red, green, blue);
-        pix = row->getPixel(_x - y);
-        pix->RGB( red, green, blue);
+        if(_y+y < img->_hauteur){
+          row = img->getLigne(_y + y);
+          if(_x+x < img->_hauteur){
+            pix = row->getPixel(_x + x);
+            pix->RGB( red, green, blue);
+          }
+          if(_x-x < img->_hauteur){
+            pix = row->getPixel(_x - x);
+            pix->RGB( red, green, blue);
+          }
+        }
+        if(_y+x < img->_hauteur){
+          row = img->getLigne(_y + x);
+          if(_x+y < img->_hauteur){
+            pix = row->getPixel(_x + y);
+            pix->RGB( red, green, blue);
+          }
+          if(_x-y < img->_hauteur){
+            pix = row->getPixel(_x - y);
+            pix->RGB( red, green, blue);
+          }
+        }
+        if(_y-y < img->_hauteur){
+          row = img->getLigne(_y - y);
+          if(_x+x < img->_hauteur){
+            pix = row->getPixel(_x + x);
+            pix->RGB( red, green, blue);
+          }
+          if(_x-x < img->_hauteur){
+            pix = row->getPixel(_x - x);
+            pix->RGB( red, green, blue);
+          }
+        }
+        if(_y-x < img->_hauteur){
+          row = img->getLigne(_y - x);
+          if(_x+y < img->_hauteur){
+            pix = row->getPixel(_x + y);
+            pix->RGB( red, green, blue);
+          }
+          if(_x-y < img->_hauteur){
+            pix = row->getPixel(_x - y);
+            pix->RGB( red, green, blue);
+          }
+        }
 
         if(m > 0){
           y--;
@@ -95,29 +116,50 @@ void CDisk::draw(CImage* img){
           CLigne* row;
           CPixel* pix;
 
-          row = img->getLigne(_y + y);
-          pix = row->getPixel(_x + x);
-          pix->RGB( red, green, blue);
-          pix = row->getPixel(_x - x);
-          pix->RGB( red, green, blue);
-
-          row = img->getLigne(_y + x);
-          pix = row->getPixel(_x + y);
-          pix->RGB( red, green, blue);
-          pix = row->getPixel(_x - y);
-          pix->RGB( red, green, blue);
-
-          row = img->getLigne(_y - y);
-          pix = row->getPixel(_x + x);
-          pix->RGB( red, green, blue);
-          pix = row->getPixel(_x - x);
-          pix->RGB( red, green, blue);
-
-          row = img->getLigne(_y - x);
-          pix = row->getPixel(_x + y);
-          pix->RGB( red, green, blue);
-          pix = row->getPixel(_x - y);
-          pix->RGB( red, green, blue);
+          if(_y+y < img->_hauteur){
+            row = img->getLigne(_y + y);
+            if(_x+x < img->_hauteur){
+              pix = row->getPixel(_x + x);
+              pix->RGB( red, green, blue);
+            }
+            if(_x-x < img->_hauteur){
+              pix = row->getPixel(_x - x);
+              pix->RGB( red, green, blue);
+            }
+          }
+          if(_y+x < img->_hauteur){
+            row = img->getLigne(_y + x);
+            if(_x+y < img->_hauteur){
+              pix = row->getPixel(_x + y);
+              pix->RGB( red, green, blue);
+            }
+            if(_x-y < img->_hauteur){
+              pix = row->getPixel(_x - y);
+              pix->RGB( red, green, blue);
+            }
+          }
+          if(_y-y < img->_hauteur){
+            row = img->getLigne(_y - y);
+            if(_x+x < img->_hauteur){
+              pix = row->getPixel(_x + x);
+              pix->RGB( red, green, blue);
+            }
+            if(_x-x < img->_hauteur){
+              pix = row->getPixel(_x - x);
+              pix->RGB( red, green, blue);
+            }
+          }
+          if(_y-x < img->_hauteur){
+            row = img->getLigne(_y - x);
+            if(_x+y < img->_hauteur){
+              pix = row->getPixel(_x + y);
+              pix->RGB( red, green, blue);
+            }
+            if(_x-y < img->_hauteur){
+              pix = row->getPixel(_x - y);
+              pix->RGB( red, green, blue);
+            }
+          }
 
           if(m >= 2*x){
             m = m - 2*x-1;
