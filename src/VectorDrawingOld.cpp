@@ -23,7 +23,7 @@ int main(int argc, char * argv[]) {
     //cout<<"start loading drawing"<<endl;
     Drawing->_filename = argv[1];
     Drawing->LoadDrawing(Drawing->_filename);
-    Drawing->CreateImage(Drawing->_maxX, Drawing->_maxY, 100, 255, 25);
+    Drawing->CreateImage(Drawing->_maxX, Drawing->_maxY, Drawing->_r_backgnd, Drawing->_g_backgnd, Drawing->_b_backgnd);
     Drawing->DrawImage();
 
     image->setImage( Drawing->_img );

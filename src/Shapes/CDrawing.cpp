@@ -53,6 +53,7 @@ CDrawing::~CDrawing(){
     for(int i=0; i<_size; i++)
         delete _shapes[i];
     _shapes.clear();
+    delete _img;
 }
 //FILE--------------------------------------------------------------------------
 bool CDrawing::CreateFile(const string filename){
@@ -163,7 +164,7 @@ void CDrawing::addShape(const string command){
   outfile.close();
 
   CreateShape(command);
-  ResetSize();
+  UpdateSize();
 }
 //------------------------------------------------------------------------------
 void CDrawing::removeShape(int index){
@@ -210,7 +211,7 @@ void CDrawing::removeShape(int index){
   _shapes.erase(_shapes.begin()+index-1);
   _size--;
 
-  ResetSize();
+  UpdateSize();
 }
 //------------------------------------------------------------------------------
 void CDrawing::DrawShape(CImage* img, CShape* shape){
@@ -294,8 +295,11 @@ bool CDrawing::SetSize(int x, int y){
 bool CDrawing::UpdateSize(){
   ZBorder();
   if(not(ParameterStatus("SIZE"))){
+    _maxX = 0;
+    _maxY = 0;
     XBorder();
     YBorder();
+    cout << "Size is now X : " << _maxX << " / Y : " << _maxY << " / Z : " << _maxZ << endl;
     return true;
   }else{
     return true;
@@ -309,6 +313,7 @@ bool CDrawing::ResetSize(){
   XBorder();
   YBorder();
   ZBorder();
+  cout << "Size is now X : " << _maxX << " / Y : " << _maxY << " / Z : " << _maxZ << endl;
   return true;
 }
 //------------------------------------------------------------------------------
@@ -353,6 +358,7 @@ bool CDrawing::ResetBackgnd(){
   _r_backgnd = 255;
   _g_backgnd = 255;
   _b_backgnd = 255;
+  cout << "Background reset to white..." << endl;
   return true;
 }
 //------------------------------------------------------------------------------
@@ -408,7 +414,7 @@ bool CDrawing::ParameterStatus(string parameter){
 //------------------------------------------------------------------------------
 bool CDrawing::SetParameter(string parameter, string option){
   bool status;
-  cout << "Changing parameter status" << endl;
+  cout << "Changing "<< parameter << " status..." << endl;
   ifstream infile;
   ofstream outfile;
   infile.open(_filename+".temp");
@@ -454,24 +460,25 @@ bool CDrawing::SetParameter(string parameter, string option){
 //------------------------------------------------------------------------------
 bool CDrawing::WriteParameter(string parameter, string command){
   bool is_param = false;
-  is_param = ParameterStatus(parameter);
   string STRING;
   ifstream infile;
   infile.open(_filename);
   ofstream outfile;
   outfile.open(_filename+".temp", fstream::trunc);
-  outfile << "//"+parameter+" :" << endl;
+  //if (is_param == false){
+  //  outfile << "//"+parameter+" :" << endl;
+  //}
   while(infile.peek() != EOF){
 
     getline(infile,STRING);
-    //if (STRING.substr(0,STRING.find(":")-1) == "//"+parameter || STRING.substr(0,STRING.find(":")-1) == parameter ){
-      //is_param = true;
-    //}
+    if (STRING.substr(0,STRING.find(":")-1) == "//"+parameter || STRING.substr(0,STRING.find(":")-1) == parameter ){
+      is_param = true;
+    }
     outfile << STRING << endl;
   }
-  //if( is_param == false){
-    //outfile << "//"+parameter+" :" << endl;
-  //}
+  if( is_param == false){
+    outfile << "//"+parameter+" :" << endl;
+  }
 
   infile.close();
   outfile.close();
@@ -487,9 +494,16 @@ bool CDrawing::WriteParameter(string parameter, string command){
     getline(infile, STRING);
     if (STRING.substr(0,STRING.find(":")-1) == "//"+parameter)
       outfile << "//" << command << endl;
-    else if(STRING.substr(0,STRING.find(":")-1) == parameter)
+    else if(STRING.substr(0,STRING.find(":")-1) == parameter){
       outfile << command << endl;
-    else
+      if (parameter == "SIZE"){
+        SetSize(command);
+      }else if(parameter == "BACKGROUND"){
+        SetBackgnd(command);
+      }else if(parameter == "SCALE"){
+        SetScale(command);
+      }
+    }else
       outfile << STRING << endl;
   }
   return true;

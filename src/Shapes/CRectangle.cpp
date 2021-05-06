@@ -47,28 +47,28 @@ CRectangle::~CRectangle(){
 }
 
 void CRectangle::draw(CImage* img){
-  int red   = CShape::opacityR(img);
-  int green = CShape::opacityG(img);
-  int blue  = CShape::opacityB(img);
+  //int red   = CShape::opacityR(img);
+  //int green = CShape::opacityG(img);
+  //int blue  = CShape::opacityB(img);
   if (_type == "RECTANGLE"){
     for(int ligne =0; ligne < _height; ligne++){
       if(_y + ligne < img->_hauteur){
         CLigne* row = img->getLigne(_y + ligne);
-        if (_y < ligne < _height){
+        if (_y+1 < ligne < _height-1){
           if( _x < img->_largeur){
             CPixel* p = row->getPixel(_x);
-            p->RGB( red, green, blue);
+            p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }
           if( _x + _length - 1 < img->_largeur){
             CPixel* p = row->getPixel(_x + _length - 1);
-            p->RGB( red, green, blue);
+            p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }
         }
         if(ligne == 0 || ligne == _height-1){
           for(int col = 0; col<_length; col++){
             if( _x + col < img->_largeur){
               CPixel* p = row->getPixel(_x + col);
-              p->RGB( red, green, blue);
+              p->RGB(opacityR(p), opacityG(p), opacityB(p));
             }
           }
         }
@@ -82,7 +82,7 @@ void CRectangle::draw(CImage* img){
         for(int col = 0; col<_length; col++){
           if( _x + col < img->_largeur){
             CPixel* p = row->getPixel(_x + col);
-            p->RGB( red, green, blue);
+            p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }
         }
       }

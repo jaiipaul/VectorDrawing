@@ -27,9 +27,11 @@ void Info(CDrawing *Drawing){
 
     cout << "SIZE : "  << Drawing->_maxX  << " x " << Drawing->_maxY << " pixels" << endl;
     cout << "PLANS : " << Drawing->_maxZ  << endl;
+    cout << "BACKGROUND : " << "R:" << Drawing->_r_backgnd << " G:" << Drawing->_g_backgnd << " B:" << Drawing->_b_backgnd << endl;
     cout << "SCALE : " << Drawing->_scale << endl;
     cout << Drawing->_size << " shapes" << endl;
-    cout << "------------------------------" << endl;;
+    cout << "------------------------------" << endl;
+    cout << endl;
 }
 
 bool check_Xlocation(int x,  CDrawing* Drawing){
@@ -213,6 +215,6 @@ string ParameterCommand(string parameter){
     cin >> param;
     command = command+param+";";
   }
-  cout << command << endl;
+  //cout << command << endl;
   return command;
 }

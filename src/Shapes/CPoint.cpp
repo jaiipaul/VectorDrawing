@@ -39,11 +39,11 @@ CPoint::~CPoint(){
 }
 
 void CPoint::draw(CImage* img){
-  int red   = CShape::opacityR(img);
-  int green = CShape::opacityG(img);
-  int blue  = CShape::opacityB(img);
+  //int red   = CShape::opacityR(img);
+  //int green = CShape::opacityG(img);
+  //int blue  = CShape::opacityB(img);
   if( _x < img->_largeur && _y < img->_hauteur){
     CPixel *p = img->getPixel(_x, _y);
-    p->RGB( red, green, blue);
+    p->RGB(opacityR(p), opacityG(p), opacityB(p));
   }
 }
