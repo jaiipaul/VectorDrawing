@@ -50,6 +50,8 @@ void CLine::draw(CImage* img){
   //int red   = CShape::opacityR(img);
   //int green = CShape::opacityG(img);
   //int blue  = CShape::opacityB(img);
+
+
   int x, y, px, py;
   double pente, p;
   int invert = 0;
@@ -99,9 +101,9 @@ void CLine::draw(CImage* img){
     px = x;
     py = y;
 
-    if(py < img->_hauteur){
+    if(0 < py && py < img->_hauteur){
       CLigne* row = img->getLigne(py);
-      if(px < img->_largeur){
+      if(0 < px && px < img->_largeur){
         CPixel* pix = row->getPixel(px);
         pix->RGB(opacityR(pix), opacityG(pix), opacityB(pix));
       }

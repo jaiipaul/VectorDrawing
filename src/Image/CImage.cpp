@@ -54,3 +54,19 @@ CPixel* CImage::getPixel(int posX, int posY){
     if( ligne == NULL) return NULL;
     return ligne->getPixel(posX);
 }
+
+bool CImage::PixelsReady(){
+  CLigne* row;
+  CPixel* pix;
+  for(int y = 0; y < _hauteur; y++){
+    row = getLigne(y);
+    for(int x = 0; x < _largeur; x++){
+       pix = row->getPixel(x);
+       if (pix->Ready() != true){
+          return false;
+       }
+    }
+  }
+    //cout << "ligne " << y << " undrawn" << endl;
+  return true;
+}

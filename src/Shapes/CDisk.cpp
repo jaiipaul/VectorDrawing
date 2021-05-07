@@ -46,6 +46,9 @@ void CDisk::draw(CImage* img){
   //int red   = CShape::opacityR(img);
   //int green = CShape::opacityG(img);
   //int blue  = CShape::opacityB(img);
+
+
+
   if (_type == "DISK"){
     int x = 0;
     int y = (_radius-1);
@@ -54,46 +57,46 @@ void CDisk::draw(CImage* img){
         CLigne* row;
         CPixel* p;
 
-        if(_y+y < img->_hauteur){
+        if(0 < _y+y && _y+y < img->_hauteur){
           row = img->getLigne(_y + y);
-          if(_x+x < img->_largeur){
+          if(0 < _x+x && _x+x < img->_largeur){
             p = row->getPixel(_x + x);
             p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }
-          if(_x-x < img->_largeur){
+          if(0 < _x-x && _x-x < img->_largeur){
             p = row->getPixel(_x - x);
             p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }
         }
-        if(_y+x < img->_hauteur){
+        if(0 < _y+x && _y+x < img->_hauteur){
           row = img->getLigne(_y + x);
-          if(_x+y < img->_largeur){
+          if(0 < _x+y && _x+y < img->_largeur){
             p = row->getPixel(_x + y);
             p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }
-          if(_x-y < img->_largeur){
+          if(0 < _x-y && _x-y < img->_largeur){
             p = row->getPixel(_x - y);
             p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }
         }
-        if(_y-y < img->_hauteur){
+        if(0 < _y-y && _y-y < img->_hauteur){
           row = img->getLigne(_y - y);
-          if(_x+x < img->_largeur){
+          if(0 < _x+x && _x+x < img->_largeur){
             p = row->getPixel(_x + x);
             p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }
-          if(_x-x < img->_largeur){
+          if(0 < _x-x && _x-x < img->_largeur){
             p = row->getPixel(_x - x);
             p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }
         }
-        if(_y-x < img->_hauteur){
+        if(0 < _y-x && _y-x < img->_hauteur){
           row = img->getLigne(_y - x);
-          if(_x+y < img->_largeur){
+          if(0 < _x+y && _x+y < img->_largeur){
             p = row->getPixel(_x + y);
             p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }
-          if(_x-y < img->_largeur){
+          if(0 < _x-y && _x-y < img->_largeur){
             p = row->getPixel(_x - y);
             p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }
@@ -116,46 +119,46 @@ void CDisk::draw(CImage* img){
           CLigne* row;
           CPixel* p;
 
-          if(_y+y < img->_hauteur){
+          if(0 < _y+y && _y+y < img->_hauteur){
             row = img->getLigne(_y + y);
-            if(_x+x < img->_largeur){
+            if(0 < _x+x && _x+x < img->_largeur){
               p = row->getPixel(_x + x);
               p->RGB(opacityR(p), opacityG(p), opacityB(p));
             }
-            if(_x-x < img->_largeur){
+            if(0 < _x-x && _x-x < img->_largeur){
               p = row->getPixel(_x - x);
               p->RGB(opacityR(p), opacityG(p), opacityB(p));
             }
           }
-          if(_y+x < img->_hauteur){
+          if(0 < _y+x && _y+x < img->_hauteur){
             row = img->getLigne(_y + x);
-            if(_x+y < img->_largeur){
+            if(0 < _x+y && _x+y < img->_largeur){
               p = row->getPixel(_x + y);
               p->RGB(opacityR(p), opacityG(p), opacityB(p));
             }
-            if(_x-y < img->_largeur){
+            if(0 < _x-y && _x-y < img->_largeur){
               p = row->getPixel(_x - y);
               p->RGB(opacityR(p), opacityG(p), opacityB(p));
             }
           }
-          if(_y-y < img->_hauteur){
+          if(0 < _y-y && _y-y < img->_hauteur){
             row = img->getLigne(_y - y);
-            if(_x+x < img->_largeur){
+            if(0 < _x+x && _x+x < img->_largeur){
               p = row->getPixel(_x + x);
               p->RGB(opacityR(p), opacityG(p), opacityB(p));
             }
-            if(_x-x < img->_largeur){
+            if(0 < _x-x && _x-x < img->_largeur){
               p = row->getPixel(_x - x);
               p->RGB(opacityR(p), opacityG(p), opacityB(p));
             }
           }
-          if(_y-x < img->_hauteur){
+          if(0 < _y-x && _y-x < img->_hauteur){
             row = img->getLigne(_y - x);
-            if(_x+y < img->_largeur){
+            if(0 < _x+y && _x+y < img->_largeur){
               p = row->getPixel(_x + y);
               p->RGB(opacityR(p), opacityG(p), opacityB(p));
             }
-            if(_x-y < img->_largeur){
+            if(0 < _x-y && _x-y < img->_largeur){
               p = row->getPixel(_x - y);
               p->RGB(opacityR(p), opacityG(p), opacityB(p));
             }

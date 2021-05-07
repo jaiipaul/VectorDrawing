@@ -75,7 +75,7 @@ bool CDrawing::CreateFile(const string filename){
   outfile.close();
   return true;
   }
-
+//------------------------------------------------------------------------------
 bool CDrawing::LoadDrawing(const string filename){
   cout << ">>> Loading drawing" << endl;
   string STRING;
@@ -235,6 +235,7 @@ bool CDrawing::DrawImage(){
     cout << "Plan Z = " << z << endl;
     for (int i = 0; i < _size; i++){
       if(_shapes[i]->_z == z){
+        _img->Undraw();
         DrawShape(_img, _shapes[i]);
         cout <<"shape " << i+1 << " " << _shapes[i]->_type << " drawn" << endl;
       }
@@ -389,7 +390,6 @@ bool CDrawing::ResetScale(){
   _scale = 1;
   return true;
 }
-
 //PARAMETERS--------------------------------------------------------------------
 bool CDrawing::ParameterStatus(string parameter){
   bool status = false;

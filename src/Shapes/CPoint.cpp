@@ -42,7 +42,8 @@ void CPoint::draw(CImage* img){
   //int red   = CShape::opacityR(img);
   //int green = CShape::opacityG(img);
   //int blue  = CShape::opacityB(img);
-  if( _x < img->_largeur && _y < img->_hauteur){
+
+  if( 0 < _x && _x < img->_largeur && 0 < _y && _y < img->_hauteur){
     CPixel *p = img->getPixel(_x, _y);
     p->RGB(opacityR(p), opacityG(p), opacityB(p));
   }

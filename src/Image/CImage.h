@@ -39,6 +39,8 @@ public:
     CLigne* getLigne(int position);
 
     CPixel* getPixel(int posX, int posY);
+
+    bool PixelsReady();
 };
 
 #endif /*CIMAGE_H_*/
