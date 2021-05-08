@@ -17,6 +17,8 @@ SRC=./src/Format/CBitmap.cpp   \
 		./src/Shapes/CLine.cpp    \
 		./src/Shapes/CDisk.cpp    \
 		./src/Shapes/CLine.cpp    \
+		./src/Functions/Menus.cpp \
+		./src/Functions/Functions.cpp \
     ./src/VectorDrawing.cpp
 
 

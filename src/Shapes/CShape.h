@@ -12,6 +12,8 @@ using namespace std;
 class CShape{
   public :
     string _type;
+    int    _Xsize;
+    int    _Ysize;
     int    _z;
     int    _red;
     int    _green;
@@ -24,6 +26,8 @@ class CShape{
     ~CShape();
 
     virtual void draw(CImage* img)=0;
-    void opacity(CImage* img);
+    int opacityR(CPixel* pix);
+    int opacityG(CPixel* pix);
+    int opacityB(CPixel* pix);
 };
 #endif /*CSHAPE_H_*/

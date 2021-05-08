@@ -13,6 +13,7 @@ CPixel::CPixel(int r, int g, int b){
 	red   = r;
 	green = g;
 	blue  = b;
+	drawn = false;
 }
 
 CPixel::CPixel(){
@@ -49,7 +50,15 @@ void CPixel::Blue(int b){
 }
 
 void CPixel::RGB(int r, int g, int b){
-	Red(r);
-	Green(g);
-	Blue(b);
+	if (drawn == false){
+		Red(r);
+		Green(g);
+		Blue(b);
+		drawn = true;
+	}
+}
+
+bool CPixel::Undraw(){
+	drawn = false;
+	return true;
 }

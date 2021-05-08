@@ -5,39 +5,46 @@ CPoint::CPoint(string command, string type, size_t pos1){
 
   size_t pos2 = command.find(",");
   _x         = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
-  cout << pos2 <<"_"<< _x  << endl;
+  cout <<"> X : " << _x;
 
   pos1     = command.find(",", pos2+1);
   _y         = atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
-  cout << pos1 <<"_"<< _y  << endl;
+  cout << " / Y : " << _y;
 
   pos2  = command.find(",", pos1+1);
   _z         = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
-  cout << pos2 <<"_"<< _z << endl;
+  cout << " / Z : " << _z << endl;
 
   pos1  = command.find(",", pos2+1);
   _red         = atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
-  cout << pos1 <<"_"<< _red << endl;
+  cout <<  "> RED : "<< _red;
 
   pos2  = command.find(",", pos1+1);
   _green       = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
-  cout << pos2 <<"_"<< _green << endl;
+  cout << " / GREEN : "<< _green;
 
   pos1  = command.find(",", pos2+1);
   _blue        = atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
-  cout << pos1 <<"_"<< _blue << endl;
+  cout << " / BLUE : "<< _blue;
 
   pos2  = command.find(";", pos1+1);
   _opacity     = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
-  cout << pos2 <<"_"<< _opacity << endl;
+  cout << " / OPACITY : " << _opacity << endl;
+
+  _Xsize = _x;
+  _Ysize = _y;
 }
 
 CPoint::~CPoint(){
 }
 
 void CPoint::draw(CImage* img){
-  CShape::opacity(img);
-  CPixel *p = img->getPixel(_x, _y);
-  //cout << _red << "/" << _green << "/" << _blue << endl;
-  p->RGB(  _red,  _green,  _blue);
+  //int red   = CShape::opacityR(img);
+  //int green = CShape::opacityG(img);
+  //int blue  = CShape::opacityB(img);
+
+  if( 0 < _x && _x < img->_largeur && 0 < _y && _y < img->_hauteur){
+    CPixel *p = img->getPixel(_x, _y);
+    p->RGB(opacityR(p), opacityG(p), opacityB(p));
+  }
 }
