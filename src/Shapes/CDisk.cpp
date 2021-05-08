@@ -1,46 +1,50 @@
 #include "CDisk.h"
 
-CDisk::CDisk(string command, string type, size_t pos1){
+CDisk::CDisk(string command, string type, size_t pos1, int scale){
   _type = type;
 
   size_t pos2 = command.find(",");
-  _x           = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
+  _x           = scale*atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
   cout << pos2 <<"_"<< _x  << endl;
 
   pos1     = command.find(",", pos2+1);
-  _y           = atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
+  _y           = scale*atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
   cout << pos1 <<"_"<< _y  << endl;
 
   pos2 = command.find(",", pos1+1);
-  _radius      = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
+  _radius      = scale*atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
   cout << pos2 <<"_"<< _radius  << endl;
 
   pos1     = command.find(",", pos2+1);
-  _red      = atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
-  cout << pos1 <<"_"<< _red  << endl;
+  _z           = atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
+  cout << pos1 <<"_"<< _z  << endl;
 
   pos2  = command.find(",", pos1+1);
-  _green         = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
-  cout << pos2 <<"_"<< _green << endl;
+  _red         = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
+  cout << pos2 <<"_"<< _red << endl;
 
   pos1  = command.find(",", pos2+1);
-  _blue       = atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
-  cout << pos1 <<"_"<< _blue << endl;
+  _green       = atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
+  cout << pos1 <<"_"<< _green << endl;
 
   pos2  = command.find(",", pos1+1);
-  _opacity        = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
-  cout << pos2 <<"_"<< _opacity << endl;
+  _blue        = atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str());
+  cout << pos2 <<"_"<< _blue << endl;
+
+  pos1  = command.find(";", pos2+1);
+  _opacity     = atoi((command.substr(pos2+2, pos1-(pos2+2))).c_str());
+  cout << pos1 <<"_"<< _opacity << endl;
 }
 
 CDisk::~CDisk(){
 }
 
-void CDisk::drawDisk(CImage* img){
-  opacity(img);
+void CDisk::draw(CImage* img){
+  CShape::opacity(img);
   if (_type == "DISK"){
     int x = 0;
-    int y = _radius;
-    int m = 5 - 4*_radius;
+    int y = (_radius-1);
+    int m = 5 - 4*(_radius-1);
     while (x <= y){
         CLigne* row;
         CPixel* pix;
@@ -77,8 +81,8 @@ void CDisk::drawDisk(CImage* img){
         m = m + 8*x + 4;
     }
   }
-  if ( _type == "DISK_F"){
-    for (int k=0;k<= _radius;k++){
+  if (_type == "DISK_F"){
+    for (int k=0;k < _radius;k++){
       int x = 0;
       int y = k;
       int m = k - 1;
@@ -119,18 +123,11 @@ void CDisk::drawDisk(CImage* img){
             y--;
           }
           else{
-            m = m + 2*(x - y - 1);
+            m = m + 2*(y - x - 1);
             y--;
             x++;
           }
       }
     }
   }
-}
-
-void CDisk::opacity(CImage* img){
-  double opacity = (double)_opacity/100;
-  _red   = floor(opacity*_red   + (1-opacity)*img->r_backgnd);
-  _green = floor(opacity*_green + (1-opacity)*img->g_backgnd);
-  _blue  = floor(opacity*_blue  + (1-opacity)*img->b_backgnd);
 }

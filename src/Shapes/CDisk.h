@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <math.h>
+#include "CShape.h"
 #include "../Image/CImage.h"
 
 using namespace std;
@@ -10,23 +11,17 @@ using namespace std;
 #ifndef CDISK_H_
 #define CDISK_H_
 
-class CDisk{
-  private :
-    string _type;
+class CDisk : public CShape{
+  public :
     int    _x;
     int    _y;
     int    _radius;
-    int    _red;
-    int    _green;
-    int    _blue;
-    int    _opacity;
 
   public :
-    CDisk(string command, string type, size_t pos1);
+    CDisk(string command, string type, size_t pos1, int scale);
     ~CDisk();
 
-   void drawDisk(CImage* img);
-   void opacity(CImage* img );
+   void draw(CImage* img);
 };
 
 #endif /*CPOINT_H_*/
