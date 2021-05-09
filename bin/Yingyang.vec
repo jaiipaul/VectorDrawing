@@ -1,12 +1,12 @@
 //Drawing file : Yingyang.vec which contains all data to draw the picture
 
-//PARAMETERS : 
+//PARAMETERS :
 SIZE : 400, 400;
 BACKGROUND : 255, 255, 255;
-SCALE : 1;
+SCALE : 4;
 
-//SHAPES : DISK_F : 200, 200, 200, 1, 0, 0, 0, 100;
-
+//SHAPES :
+DISK_F : 200, 200, 200, 1, 0, 0, 0, 100;
 RECTANGLE_F : 0, 0, 200, 400, 1, 255, 255, 255, 100;
 DISK_F : 200, 100, 100, 2, 0, 0, 0, 100;
 DISK_F : 1, 1, 1, 1, 0, 0, 1, 1;

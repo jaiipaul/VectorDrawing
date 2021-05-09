@@ -11,7 +11,7 @@ void Draw(CDrawing *Drawing){
   //if(Drawing->_img != NULL){
   //delete Drawing->_img;
   //}
-  Drawing->CreateImage(Drawing->_maxX, Drawing->_maxY, Drawing->_r_backgnd, Drawing->_g_backgnd, Drawing->_b_backgnd);
+  Drawing->CreateImage(Drawing->_scale*Drawing->_maxX, Drawing->_scale*Drawing->_maxY, Drawing->_r_backgnd, Drawing->_g_backgnd, Drawing->_b_backgnd);
   Drawing->DrawImage();
 
   image->setImage( Drawing->_img );
@@ -30,7 +30,12 @@ void Info(CDrawing *Drawing){
     cout << "BACKGROUND : " << "R:" << Drawing->_r_backgnd << " G:" << Drawing->_g_backgnd << " B:" << Drawing->_b_backgnd << endl;
     cout << "SCALE : " << Drawing->_scale << endl;
     cout << Drawing->_size << " shapes" << endl;
-    cout << "------------------------------" << endl;
+
+    string str = "##---- PROPERTIES OF :  ----##";
+    for(int i = 0; i < str.size() + (Drawing->_filename.substr(0, Drawing->_filename.find("."))).size(); i++){
+      cout << "-";
+    }
+    cout << endl;
     cout << endl;
 }
 

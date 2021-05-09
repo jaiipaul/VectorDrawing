@@ -21,6 +21,8 @@ class CPoint : public CShape{
     ~CPoint();
 
     void draw(CImage* img);
+    void draw(CImage* img, int scale);
+    void info();
 };
 
 #endif /*CPOINT_H_*/

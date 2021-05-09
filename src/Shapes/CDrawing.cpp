@@ -71,7 +71,7 @@ bool CDrawing::CreateFile(const string filename){
   outfile << "//BACKGROUND : " << endl;
   outfile << "//SCALE : " << endl;
   outfile << endl;
-  outfile << "//SHAPES : ";
+  outfile << "//SHAPES : "<< endl;
   outfile.close();
   return true;
   }
@@ -118,39 +118,32 @@ bool CDrawing::CreateShape(const string command){
     size_t pos = command.find(":");
     string type = command.substr(0,pos-1);
     if(type == "POINT"){
-        cout <<"\033[44m"<< "POINT            " <<"\033[0m" << endl;
         CPoint* shape_p = new CPoint(command, type, pos);
         _shapes.push_back(shape_p);
         _size++;
-        cout <<"-----------------"<<endl;
     }
     else if(type == "RECTANGLE" || type == "RECTANGLE_F"){
-        (type == "RECTANGLE_F")?cout <<"\033[45m"<< "RECTANGLE_F      " <<"\033[0m" << endl:cout <<"\033[45m"<< "RECTANGLE        " <<"\033[0m" << endl;
         CRectangle* shape_r = new CRectangle(command, type, pos, _scale);
         _shapes.push_back(shape_r);
         _size++;
-        cout <<"-----------------"<<endl;
     }
     else if(type == "DISK" || type == "DISK_F"){
-        (type == "DISK_F")?cout <<"\033[42m"<< "DISK_F           " <<"\033[0m" << endl:cout <<"\033[42m"<< "DISK             " <<"\033[0m" << endl;
         CDisk* shape_d = new CDisk(command, type, pos, _scale);
         _shapes.push_back(shape_d);
         _size++;
-        cout <<"-----------------"<<endl;
     }
     else if(type == "LINE"){
-        cout <<"\033[41m"<< "LINE             " <<"\033[0m" << endl;
         CLine* shape_l = new CLine(command, type, pos, _scale);
         _shapes.push_back(shape_l);
         _size++;
-        cout <<"-----------------"<<endl;
     }
     return true;
   }
 //------------------------------------------------------------------------------
 void CDrawing::showShapes(){
   for(int i = 0; i < _size; i++){
-    cout << "[" << i+1 << "]" << _shapes[i]->_type << " | X : " << _shapes[i]->_Xsize << " | Y : " << _shapes[i]->_Ysize << endl;
+    cout << "[" << i+1 << "]  ";
+    _shapes[i]->info();
   }
 }
 //------------------------------------------------------------------------------
@@ -164,6 +157,7 @@ void CDrawing::addShape(const string command){
   outfile.close();
 
   CreateShape(command);
+  _shapes[_size-1]->info();
   UpdateSize();
 }
 //------------------------------------------------------------------------------
@@ -215,7 +209,7 @@ void CDrawing::removeShape(int index){
 }
 //------------------------------------------------------------------------------
 void CDrawing::DrawShape(CImage* img, CShape* shape){
-  shape->draw(img);
+  shape->draw(img, _scale);
 }
 //IMAGE-------------------------------------------------------------------------
 bool CDrawing::CreateImage(int width, int height){
@@ -235,7 +229,7 @@ bool CDrawing::DrawImage(){
     cout << "Plan Z = " << z << endl;
     for (int i = 0; i < _size; i++){
       if(_shapes[i]->_z == z){
-        _img->Undraw();
+        _img->PixelsReady();
         DrawShape(_img, _shapes[i]);
         cout <<"shape " << i+1 << " " << _shapes[i]->_type << " drawn" << endl;
       }
@@ -367,8 +361,6 @@ bool CDrawing::SetScale(const string command){
   size_t pos1 = command.find(":");
   size_t pos2 = command.find(";");
   _scale = (command.substr(pos1+2, pos2-(pos1+2)) != "#") ? atoi((command.substr(pos1+2, pos2-(pos1+2))).c_str()) : _scale;
-  _maxX = _scale*_maxX;
-  _maxY = _scale*_maxY;
   cout << "Scale set at : ";
   cout << _scale << endl;
 
@@ -378,8 +370,6 @@ bool CDrawing::SetScale(const string command){
 bool CDrawing::SetScale(int scale){
 
   _scale = scale;
-  _maxX = _scale*_maxX;
-  _maxY = _scale*_maxY;
   cout << "Scale set at : ";
   cout << _scale << endl;
 
