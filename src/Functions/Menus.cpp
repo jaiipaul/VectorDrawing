@@ -1,7 +1,7 @@
 
 #include "Menus.h"
 
-int ShapesMenu(CDrawing *Drawing){
+int ShapesMenu(CDrawing* Drawing){
   string option;
   while(1){
     cout << "\033[41m";
@@ -79,7 +79,7 @@ int ParameterMenu(CDrawing* Drawing, string option){
   return 0;
 }
 
-int EditMenu(CDrawing *Drawing){
+int EditMenu(CDrawing* Drawing){
   string option;
   while(1){
     cout << "\033[41m";
@@ -104,7 +104,7 @@ int EditMenu(CDrawing *Drawing){
   }
 }
 
-int Menu(CDrawing *Drawing){
+int Menu(CDrawing* Drawing){
   string option;
   while(1){
     cout << "\033[41m";
@@ -134,6 +134,7 @@ int Menu(CDrawing *Drawing){
       Info(Drawing);
     }
     else if(option == "BACK" || option == "back" || option == "<"){
+      remove((Drawing->_filename+".temp").c_str());
       return 0;
     }
   }
