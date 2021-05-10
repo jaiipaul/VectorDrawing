@@ -1,7 +1,6 @@
 #include "CDrawing.h"
 //CONSTRUCTORS------------------------------------------------------------------
 CDrawing::CDrawing(int width, int height){
-  cout <<"\033[33m" << "initializing drawing"<< "\033[0m" << endl;
   CreateImage(width, height);
   _size  = 0;
   _maxX  = width;
@@ -14,7 +13,6 @@ CDrawing::CDrawing(int width, int height){
 }
 //------------------------------------------------------------------------------
 CDrawing::CDrawing(int width, int height, int r, int g, int b){
-  cout << "\033[33m"<< "Initializing drawing"<< "\033[0m" << endl;
   CreateImage(width, height, r, g, b);
   _size  = 0;
   _maxX  = width;
@@ -27,7 +25,6 @@ CDrawing::CDrawing(int width, int height, int r, int g, int b){
 }
 //------------------------------------------------------------------------------
 CDrawing::CDrawing(int scale){
-  cout <<"\033[33m" << "initializing drawing"<< "\033[0m" << endl;
   _size  = 0;
   _maxX  = 0;
   _maxY  = 0;

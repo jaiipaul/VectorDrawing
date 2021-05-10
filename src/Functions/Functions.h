@@ -16,6 +16,8 @@ void Draw(CDrawing *Drawing);
 
 void Info(CDrawing *Drawing);
 
+void Help();
+
 string newShapeCommand(CDrawing *Drawing);
 
 string ParameterCommand(string parameter);

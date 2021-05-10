@@ -39,6 +39,31 @@ void Info(CDrawing *Drawing){
     cout << endl;
 }
 
+void Help(){
+  cout << "##--- Vector Drawing Help ---##" << endl;
+  cout << endl;
+  cout << " >> 3 methods to launch VectorDrawing app :"<< endl;
+  cout << endl;
+  cout << "    > ./VectorDrawing" << endl;
+  cout << "     | This command launches VectorDrawing interactive terminal application" << endl;
+  cout << "     | You'll be able to create new drawings or open previous ones, and work on them"        << endl;
+  cout << "     | edit drawing properties, add and remove shapes to draw..."            << endl;
+  cout << endl;
+  cout << "    > ./VectorDrawing 'filename'"<< endl;
+  cout << "     | This command creates the bmp image described by the .vec file given in argument" << endl;
+  cout << "     | Scale is automatically set to 1"<< endl;
+  cout << endl;
+  cout << "    > ./VectorDrawing 'filename' 'scale'"<< endl;
+  cout << "     | This command also creates the bmp image described by the .vec file given in argument" << endl;
+  cout << "     | You can choose the scale of the drawing by entering an > 0 integer  "<< endl;
+  cout << endl;
+  cout << " >> For more information on the use of the application, or the .vec synthax :" << endl;
+  cout << "    Read the ReadMe file in the project root directory" << endl;
+  cout << endl;
+  cout << "Paul Friteau / Samuel Marteau / 2A Electronique ENSEIRB-MATMECA" << endl;
+  cout << "PG208 C++ Programming project Bertrand LEGAL" << endl;
+}
+
 bool check_Xlocation(int x,  CDrawing* Drawing){
   if(Drawing->ParameterStatus("SIZE") == true){
     if (x <= Drawing->_maxX){

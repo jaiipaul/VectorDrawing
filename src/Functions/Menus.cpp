@@ -114,7 +114,7 @@ int Menu(CDrawing* Drawing){
     cout << " \033[0m>>> ";
     cout << Drawing->_filename.substr(0, Drawing->_filename.find("."));
     cout << " >>";
-    cout << " | \033[102m\033[30m DRAW \033[0m";
+    cout << " | \033[42m\033[30m DRAW \033[0m";
     cout << " | \033[47m\033[30m EDIT \033[0m";
     cout << " | \033[47m\033[30m SHAPES \033[0m";
     cout << " | \033[47m\033[30m INF0 \033[0m";
