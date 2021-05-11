@@ -45,7 +45,7 @@ public:
 	int Blue();
 
 	void RGB(int r, int g, int b);
-	bool Undraw();
+	bool Ready();
 };
 
 #endif /*CPIXEL_H_*/

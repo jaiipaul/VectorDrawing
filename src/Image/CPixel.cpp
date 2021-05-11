@@ -58,7 +58,7 @@ void CPixel::RGB(int r, int g, int b){
 	}
 }
 
-bool CPixel::Undraw(){
+bool CPixel::Ready(){
 	drawn = false;
 	return true;
 }

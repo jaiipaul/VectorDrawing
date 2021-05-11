@@ -26,6 +26,8 @@ class CShape{
     ~CShape();
 
     virtual void draw(CImage* img)=0;
+    virtual void draw(CImage* img, int scale)=0;
+    virtual void info()=0;
     int opacityR(CPixel* pix);
     int opacityG(CPixel* pix);
     int opacityB(CPixel* pix);
