@@ -29,21 +29,23 @@ private:
 	int red;
 	int green;
 	int blue;
-	
+
+	bool drawn;
+
 public:
 	CPixel(int r, int g, int b);
 	CPixel();
-	
+
 	void Red(int r);
 	void Green(int g);
 	void Blue(int b);
-	
+
 	int Red();
 	int Green();
 	int Blue();
-	
+
 	void RGB(int r, int g, int b);
-	
+	bool Ready();
 };
 
 #endif /*CPIXEL_H_*/

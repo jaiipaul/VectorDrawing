@@ -6,28 +6,66 @@
 
 using namespace std;
 
-#include "./Format/CBitmap.h"
-#include "./Shapes/CDrawing.h"
+#include "./Functions/Menus.h"
+#include "./Functions/Functions.h"
+
 
 int main(int argc, char * argv[]) {
-    cout << "(II) P_Bitmap exection start (" << __DATE__ << " - " << __TIME__ << ")" << endl;
-    cout << "(II) + Number of arguments = " << argc << endl;
+  if(argc == 1){
+    cout << "#------------------------------#"<<endl;
+    cout << "| \033[41m";
+    cout << " \033[42m";
+    cout << " \033[43m";
+    cout << " \033[44m";
+    cout << " \033[0m";
+    cout <<       "   VECTOR DRAWING  ";
+    cout << " \033[44m";
+    cout << " \033[43m";
+    cout << " \033[42m";
+    cout << " \033[41m";
+    cout << " \033[0m |" << endl;
+    cout << "#------------------------------#"<<endl;
 
-    cout << "(II) CBitmap object creation" << endl;
-    CBitmap *image = new CBitmap();
-    string filename2 = "Drawing.bmp";
-
-    cout << "(II) CImage pointer extraction" << endl;
-    //CImage *img = new CImage(200,200);
-    CDrawing *Drawing = new CDrawing(40, 40, 255, 255, 255);
-
-    Drawing->LoadDrawing(argv[1]);
-    Drawing->Draw();
-
-    image->setImage( Drawing->_img );
-    cout << "(II) CBitmap image saving" << endl;
-    image->SaveBMP(filename2);
-
-    delete Drawing;
+    StartMenu();
     return 1;
+  }else if(argc == 2){
+    string arg = argv[1];
+    if (arg == "help"){
+      Help();
+      return 1;
+    }else{
+      CDrawing *Drawing = new CDrawing();
+      Drawing->_filename = arg;
+      bool load = Drawing->LoadDrawing(Drawing->_filename);
+      if(load == true){
+        cout << ">>> " << Drawing->_filename << " loaded" << endl;
+        Draw(Drawing);
+        delete Drawing;
+        return 1;
+      }else{
+        cout << "Can't load drawing ..." << endl;
+        return 1;
+      }
+    }
+  }else if(argc == 3){
+    string arg = argv[1];
+    int  scale = atoi(argv[2]);
+    if(scale > 0){
+      CDrawing *Drawing = new CDrawing(scale);
+      Drawing->_filename = arg;
+      bool load = Drawing->LoadDrawing(Drawing->_filename);
+      if(load == true){
+        cout << ">>> " << Drawing->_filename << " loaded" << endl;
+        Draw(Drawing);
+        delete Drawing;
+        return 1;
+      }else{
+        cout << "Can't load drawing ..." << endl;
+        return 1;
+      }
+    }
+  }else if(argc > 3){
+    cout << "Too many arguments, try ./VectorDrawing help ..." << endl;
+    return 1;
+  }
 }

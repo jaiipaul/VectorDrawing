@@ -4,28 +4,25 @@
 #include <string>
 #include <math.h>
 #include "../Image/CImage.h"
+#include "CShape.h"
 
 using namespace std;
 
 #ifndef CPOINT_H_
 #define CPOINT_H_
 
-class CPoint{
-  private :
-    string _type;
+class CPoint : public CShape{
+  public :
     int    _x;
     int    _y;
-    int    _red;
-    int    _green;
-    int    _blue;
-    int    _opacity;
 
   public :
     CPoint(string command, string type, size_t pos1);
     ~CPoint();
 
-    void drawPoint(CImage* img);
-    void opacity(CImage* img);
+    void draw(CImage* img);
+    void draw(CImage* img, int scale);
+    void info();
 };
 
 #endif /*CPOINT_H_*/

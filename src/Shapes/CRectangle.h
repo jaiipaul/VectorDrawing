@@ -4,30 +4,26 @@
 #include <string>
 #include <math.h>
 #include "../Image/CImage.h"
-
+#include "CShape.h"
 using namespace std;
 
-#ifndef CLINE_H_
-#define CLINE_H_
+#ifndef CRECTANGLE_H_
+#define CRECTANGLE_H_
 
-class CRectangle{
-  private :
-    string _type;
+class CRectangle : public CShape{
+  public :
     int    _x;
     int    _y;
     int    _length;
     int    _height;
-    int    _red;
-    int    _green;
-    int    _blue;
-    int    _opacity;
 
   public :
-    CRectangle(string command, string type, size_t pos1);
+    CRectangle(string command, string type, size_t pos1, int scale);
     ~CRectangle();
 
-   void drawRectangle(CImage* img);
-   void opacity(CImage* img);
+   void draw(CImage* img);
+   void draw(CImage* img, int scale);
+   void info();
 };
 
 #endif /*CPOINT_H_*/
