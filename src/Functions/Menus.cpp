@@ -75,7 +75,6 @@ int ParameterMenu(CDrawing* Drawing, string option){
       return 0;
     }
   }
-  remove((Drawing->_filename+".temp").c_str());
   return 0;
 }
 

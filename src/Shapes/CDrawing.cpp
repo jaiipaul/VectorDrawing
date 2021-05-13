@@ -198,7 +198,6 @@ void CDrawing::removeShape(int index){
 
   infile.close();
   outfile.close();
-  remove((_filename+".temp").c_str());
   _shapes.erase(_shapes.begin()+index-1);
   _size--;
 
