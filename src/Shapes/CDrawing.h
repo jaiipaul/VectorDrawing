@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+#include "../Format/CBitmap.h"
 #include "../Image/CImage.h"
 #include "CShapes.h"
 

@@ -223,6 +223,17 @@ bool CDrawing::CreateImage(int width, int height, int r, int g, int b){
 }
 //------------------------------------------------------------------------------
 bool CDrawing::DrawImage(){
+  cout << "(II) P_Bitmap exection start (" << __DATE__ << " - " << __TIME__ << ")" << endl;
+  cout << "(II) CBitmap object creation" << endl;
+  CBitmap *image = new CBitmap();
+
+  string filename2 = _filename.substr(0, _filename.find(".")) + ".bmp";
+  //remove(filename2.c_str());
+  cout << "(II) CImage pointer extraction" << endl;
+  //if(Drawing->_img != NULL){
+  //delete Drawing->_img;
+  //}
+  CreateImage(_scale*_maxX, _scale*_maxY, _r_backgnd, _g_backgnd, _b_backgnd);
   cout <<"Start Drawing" << endl;
   ZBorder();
   for (int z = 0; z <= _maxZ; z++){
@@ -235,6 +246,12 @@ bool CDrawing::DrawImage(){
       }
     }
   }
+  image->setImage( _img );
+  cout << "(II) CBitmap image saving" << endl;
+  image->SaveBMP(filename2);
+
+  delete image;
+
   return true;
 }
 //PROPERTIES--------------------------------------------------------------------

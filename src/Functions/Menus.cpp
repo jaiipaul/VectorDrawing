@@ -121,7 +121,8 @@ int Menu(CDrawing* Drawing){
     cout << " | " << endl;
     cin >> option;
     if( option == "DRAW" || option == "draw" || option == "D" || option == "d"){
-      Draw(Drawing);
+      //Draw(Drawing);
+      Drawing->DrawImage();
     }
     else if(option == "EDIT" || option == "edit" || option == "E" || option == "e"){
       EditMenu(Drawing);
