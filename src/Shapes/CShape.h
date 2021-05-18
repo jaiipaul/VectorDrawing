@@ -10,7 +10,7 @@ using namespace std;
 #define CSHAPE_H_
 
 class CShape{
-  public :
+  protected :
     string _type;
     int    _Xsize;
     int    _Ysize;
@@ -31,5 +31,10 @@ class CShape{
     int opacityR(CPixel* pix);
     int opacityG(CPixel* pix);
     int opacityB(CPixel* pix);
+
+    int getLayer();
+    string getType();
+    int getXsize();
+    int getYsize();
 };
 #endif /*CSHAPE_H_*/

@@ -21,21 +21,20 @@ using namespace std;
 class CImage{
 private:
     CLigne** liste;
-
-public:
     int _hauteur;
     int _largeur;
-    int r_backgnd;
-    int g_backgnd;
-    int b_backgnd;
+    //int r_backgnd;
+    //int g_backgnd;
+    //int b_backgnd;
 
 public:
     CImage(int largeur, int hauteur);
     CImage(int largeur, int hauteur, int r, int g, int b);
     ~CImage();
 
+    int getWidth();
+    int getHeight();
     int size();
-
     CLigne* getLigne(int position);
 
     CPixel* getPixel(int posX, int posY);

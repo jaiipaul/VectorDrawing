@@ -224,10 +224,10 @@ bool CDrawing::DrawImage(){
   for (int z = 0; z <= _maxZ; z++){
     cout << "Plan Z = " << z << endl;
     for (int i = 0; i < _size; i++){
-      if(_shapes[i]->_z == z){
+      if(_shapes[i]->getLayer() == z){
         _img->PixelsReady();
         DrawShape(_img, _shapes[i]);
-        cout <<"shape " << i+1 << " " << _shapes[i]->_type << " drawn" << endl;
+        cout <<"shape " << i+1 << " " << _shapes[i]->getType() << " drawn" << endl;
       }
     }
   }
@@ -236,21 +236,21 @@ bool CDrawing::DrawImage(){
 //PROPERTIES--------------------------------------------------------------------
 bool CDrawing::XBorder(){
   for(int i = 0; i < _size; i++){
-    _maxX = _shapes[i]->_Xsize < _maxX ? _maxX : _shapes[i]->_Xsize;
+    _maxX = _shapes[i]->getXsize() < _maxX ? _maxX : _shapes[i]->getXsize();
   }
   return true;
 }
 //------------------------------------------------------------------------------
 bool CDrawing::YBorder(){
   for(int i = 0; i < _size; i++){
-    _maxY = _shapes[i]->_Ysize < _maxY ? _maxY : _shapes[i]->_Ysize;
+    _maxY = _shapes[i]->getYsize() < _maxY ? _maxY : _shapes[i]->getYsize();
   }
   return true;
 }
 //------------------------------------------------------------------------------
 bool CDrawing::ZBorder(){
   for(int i = 0; i < _size; i++){
-    _maxZ = _shapes[i]->_z < _maxZ ? _maxZ : _shapes[i]->_z;
+    _maxZ = _shapes[i]->getLayer() < _maxZ ? _maxZ : _shapes[i]->getLayer();
   }
   return true;
 }

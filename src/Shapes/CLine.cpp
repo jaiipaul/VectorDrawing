@@ -92,9 +92,9 @@ void CLine::draw(CImage* img){
     px = x;
     py = y;
 
-    if(0 < py && py < img->_hauteur){
+    if(0 < py && py < img->getHeight()){
       CLigne* row = img->getLigne(py);
-      if(0 < px && px < img->_largeur){
+      if(0 < px && px < img->getwidth()){
         CPixel* pix = row->getPixel(px);
         pix->RGB(opacityR(pix), opacityG(pix), opacityB(pix));
       }
@@ -158,9 +158,9 @@ void CLine::draw(CImage* img, int scale){
     px = x;
     py = y;
 
-    if(0 < py && py < img->_hauteur){
+    if(0 < py && py < img->getHeight()){
       CLigne* row = img->getLigne(py);
-      if(0 < px && px < img->_largeur){
+      if(0 < px && px < img->getWidth()){
         CPixel* pix = row->getPixel(px);
         pix->RGB(opacityR(pix), opacityG(pix), opacityB(pix));
       }

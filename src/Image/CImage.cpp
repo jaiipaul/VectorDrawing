@@ -21,9 +21,9 @@ CImage::CImage(int largeur, int hauteur){
 
 CImage::CImage(int largeur, int hauteur, int r, int g, int b){
     //cout << "Instanciation des lignes... " << taille << endl;
-    r_backgnd = r;
-    g_backgnd = g;
-    b_backgnd = b;
+    //r_backgnd = r;
+    //g_backgnd = g;
+    //b_backgnd = b;
     _hauteur = hauteur;
     _largeur = largeur;
     liste = (CLigne**)new CLigne**[_hauteur];
@@ -36,6 +36,14 @@ CImage::~CImage(){
     for(int i=0; i<_hauteur; i++)
         delete liste[i];
     delete liste;
+}
+
+int CImage::getWidth(){
+    return _largeur;
+}
+
+int CImage::getHeight(){
+    return _hauteur;
 }
 
 int CImage::size(){

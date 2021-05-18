@@ -30,3 +30,19 @@ int CShape::opacityB(CPixel* pix){
   double opacity = (double)_opacity/100;
   return(floor(opacity*_blue  + (1-opacity)*pix->Blue()));
 }
+
+int CShape::getLayer(){
+  return(_z);
+}
+
+string CShape::getType(){
+  return(_type);
+}
+
+int CShape::getXsize(){
+  return(_Xsize);
+}
+
+int CShape::getYsize(){
+  return(_Ysize);
+}
