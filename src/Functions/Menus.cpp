@@ -155,28 +155,34 @@ int StartMenu(){
     cin  >> option;
 
     if (option == "NEW" || option == "new" || option == "+"){
-      CDrawing *Drawing = new CDrawing();
+
       cout << "Filename : ";
       string name;
       cin >> name;
-      Drawing->SetFilename(name+".vec");
-      bool create = Drawing->CreateFile(Drawing->getFilename());
+      CDrawing *Drawing = new CDrawing(name+".vec");
+      //Drawing->SetFilename(name+".vec");
+      bool create = Drawing->CreateFile();
       if (create == true){
         cout << ">>> " << Drawing->getFilename() << " created" << endl;
         Menu(Drawing);
         delete Drawing;
+      }else{
+        delete Drawing;
       }
     }
     else if (option == "OPEN" || option == "open" || option == ">"){
-      CDrawing *Drawing = new CDrawing();
+
       cout << "Filename : ";
       string name;
       cin >> name;
-      Drawing->SetFilename(name+".vec");
-      bool load = Drawing->LoadDrawing(Drawing->getFilename());
+      CDrawing *Drawing = new CDrawing(name+".vec");
+      //Drawing->SetFilename(name+".vec");
+      bool load = Drawing->LoadDrawing();
       if(load == true){
         cout << ">>> " << Drawing->getFilename() << " loaded" << endl;
         Menu(Drawing);
+        delete Drawing;
+      }else{
         delete Drawing;
       }
     }

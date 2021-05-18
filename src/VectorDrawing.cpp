@@ -34,35 +34,15 @@ int main(int argc, char * argv[]) {
       Help();
       return 1;
     }else{
-      CDrawing *Drawing = new CDrawing();
-      Drawing->_filename = arg;
-      bool load = Drawing->LoadDrawing(Drawing->_filename);
-      if(load == true){
-        cout << ">>> " << Drawing->_filename << " loaded" << endl;
-        Draw(Drawing);
-        delete Drawing;
-        return 1;
-      }else{
-        cout << "Can't load drawing ..." << endl;
-        return 1;
-      }
+      CDrawing *Drawing = new CDrawing(arg);
+      QuickDraw(Drawing);
     }
   }else if(argc == 3){
     string arg = argv[1];
     int  scale = atoi(argv[2]);
     if(scale > 0){
-      CDrawing *Drawing = new CDrawing(scale);
-      Drawing->_filename = arg;
-      bool load = Drawing->LoadDrawing(Drawing->_filename);
-      if(load == true){
-        cout << ">>> " << Drawing->_filename << " loaded" << endl;
-        Draw(Drawing);
-        delete Drawing;
-        return 1;
-      }else{
-        cout << "Can't load drawing ..." << endl;
-        return 1;
-      }
+      CDrawing *Drawing = new CDrawing(arg, scale);
+      QuickDraw(Drawing);
     }
   }else if(argc > 3){
     cout << "Too many arguments, try ./VectorDrawing help ..." << endl;

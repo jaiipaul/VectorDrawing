@@ -1,24 +1,16 @@
 #include "Functions.h"
 
-void Draw(CDrawing *Drawing){
-  cout << "(II) P_Bitmap exection start (" << __DATE__ << " - " << __TIME__ << ")" << endl;
-  cout << "(II) CBitmap object creation" << endl;
-  CBitmap *image = new CBitmap();
-
-  string filename2 = Drawing->getFilename().substr(0, Drawing->getFilename().find(".")) + ".bmp";
-  //remove(filename2.c_str());
-  cout << "(II) CImage pointer extraction" << endl;
-  //if(Drawing->_img != NULL){
-  //delete Drawing->_img;
-  //}
-  Drawing->CreateImage(Drawing->getScale()*Drawing->getMaxX(), Drawing->getScale()*Drawing->getMaxY(), Drawing->getRbackgnd(), Drawing->getGbackgnd(), Drawing->getBbackgnd());
-  Drawing->DrawImage();
-
-  image->setImage( Drawing->getImg() );
-  cout << "(II) CBitmap image saving" << endl;
-  image->SaveBMP(filename2);
-
-  delete image;
+int QuickDraw(CDrawing *Drawing){
+  bool load = Drawing->LoadDrawing();
+  if(load == true){
+    cout << ">>> " << Drawing->getFilename() << " loaded" << endl;
+    Drawing->DrawImage();
+    delete Drawing;
+    return 1;
+  }else{
+    cout << "Can't load drawing ..." << endl;
+    return 1;
+  }
 }
 
 void Info(CDrawing *Drawing){

@@ -24,7 +24,8 @@ CDrawing::CDrawing(int width, int height, int r, int g, int b){
   _scale = 1;
 }
 //------------------------------------------------------------------------------
-CDrawing::CDrawing(int scale){
+CDrawing::CDrawing(string filename, int scale){
+  SetFilename(filename);
   _size  = 0;
   _maxX  = 0;
   _maxY  = 0;
@@ -35,7 +36,20 @@ CDrawing::CDrawing(int scale){
   _scale = scale;
 }
 //------------------------------------------------------------------------------
+CDrawing::CDrawing(string filename){
+  SetFilename(filename);
+  _size  = 0;
+  _maxX  = 0;
+  _maxY  = 0;
+  _maxZ  = 0;
+  _r_backgnd = 255;
+  _g_backgnd = 255;
+  _b_backgnd = 255;
+  _scale = 1;
+}
+//------------------------------------------------------------------------------
 CDrawing::CDrawing(){
+  _filename = "drawing.vec";
   _size  = 0;
   _maxX  = 0;
   _maxY  = 0;
@@ -50,22 +64,21 @@ CDrawing::~CDrawing(){
     for(int i=0; i<_size; i++)
         delete _shapes[i];
     _shapes.clear();
-    delete _img;
 }
 //FILE--------------------------------------------------------------------------
 void CDrawing::SetFilename(string filename){
   _filename = filename;
 }
 
-bool CDrawing::CreateFile(const string filename){
+bool CDrawing::CreateFile(){
   ofstream outfile;
-  outfile.open(filename);
+  outfile.open(_filename);
   if (outfile.is_open() == false){
-    cout << "|!| Can't open file : " << filename << " ... " << endl;
+    cout << "|!| Can't open file : " << _filename << " ... " << endl;
     return false;
   }
 
-  outfile << "//Drawing file : " << filename << " which contains all data to draw the picture" << endl;
+  outfile << "//Drawing file : " << _filename << " which contains all data to draw the picture" << endl;
   outfile << endl;
   outfile << "//PARAMETERS : " << endl;
   outfile << "//SIZE : " << endl;
@@ -77,11 +90,11 @@ bool CDrawing::CreateFile(const string filename){
   return true;
   }
 //------------------------------------------------------------------------------
-bool CDrawing::LoadDrawing(const string filename){
+bool CDrawing::LoadDrawing(){
   cout << ">>> Loading drawing" << endl;
   string STRING;
   ifstream infile;
-  infile.open(filename);
+  infile.open(_filename);
   if (infile.is_open() == false){
     cout << "|!| This file might not exist, can't find it..." << endl;
     return false;
@@ -208,8 +221,8 @@ void CDrawing::removeShape(int index){
   UpdateSize();
 }
 //------------------------------------------------------------------------------
-void CDrawing::DrawShape(CImage* img, CShape* shape){
-  shape->draw(img, _scale);
+void CDrawing::DrawShape(CShape* shape){
+  shape->draw(_img, _scale);
 }
 //IMAGE-------------------------------------------------------------------------
 bool CDrawing::CreateImage(int width, int height){
@@ -228,11 +241,8 @@ bool CDrawing::DrawImage(){
   CBitmap *image = new CBitmap();
 
   string filename2 = _filename.substr(0, _filename.find(".")) + ".bmp";
-  //remove(filename2.c_str());
   cout << "(II) CImage pointer extraction" << endl;
-  //if(Drawing->_img != NULL){
-  //delete Drawing->_img;
-  //}
+
   CreateImage(_scale*_maxX, _scale*_maxY, _r_backgnd, _g_backgnd, _b_backgnd);
   cout <<"Start Drawing" << endl;
   ZBorder();
@@ -241,7 +251,7 @@ bool CDrawing::DrawImage(){
     for (int i = 0; i < _size; i++){
       if(_shapes[i]->getLayer() == z){
         _img->PixelsReady();
-        DrawShape(_img, _shapes[i]);
+        DrawShape(_shapes[i]);
         cout <<"shape " << i+1 << " " << _shapes[i]->getType() << " drawn" << endl;
       }
     }
@@ -251,7 +261,7 @@ bool CDrawing::DrawImage(){
   image->SaveBMP(filename2);
 
   delete image;
-
+  delete _img;
   return true;
 }
 //PROPERTIES--------------------------------------------------------------------
@@ -516,28 +526,8 @@ bool CDrawing::WriteParameter(string parameter, string command){
   return true;
 }
 //------------------------------------------------------------------------------
-int CDrawing::getRbackgnd(){
-  return _r_backgnd;
-}
-
-int CDrawing::getGbackgnd(){
-  return _g_backgnd;
-}
-
-int CDrawing::getBbackgnd(){
-  return _b_backgnd;
-}
-
-int CDrawing::getScale(){
-  return _scale;
-}
-
 string CDrawing::getFilename(){
   return _filename;
-}
-
-CImage* CDrawing::getImg(){
-  return _img;
 }
 
 int CDrawing::getMaxX(){

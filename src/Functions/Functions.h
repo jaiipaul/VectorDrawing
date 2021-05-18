@@ -12,7 +12,7 @@ using namespace std;
 #ifndef FUNCTIONS_H_
 #define FUNCTIONS_H_
 
-void Draw(CDrawing *Drawing);
+int QuickDraw(CDrawing *Drawing);
 
 void Info(CDrawing *Drawing);
 

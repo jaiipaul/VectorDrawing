@@ -34,21 +34,22 @@ class CDrawing{
     CDrawing();
     CDrawing(int width, int height);
     CDrawing(int width, int height, int r, int g, int b);
-    CDrawing(int scale);
+    CDrawing(string filename, int scale);
+    CDrawing(string filename);
   //Destructor
     ~CDrawing();
 
   //File
     void SetFilename(string filename);
-    bool CreateFile(const string filename);
-    bool LoadDrawing(const string filename);
+    bool CreateFile();
+    bool LoadDrawing();
 
   //Shapes
     bool CreateShape(const string command);
     void showShapes();
     void addShape(const string command);
     void removeShape(int index);
-    void DrawShape(CImage* img, CShape* shape);
+    void DrawShape(CShape* shape);
 
   //Image
     bool CreateImage(int width, int height);
@@ -74,12 +75,7 @@ class CDrawing{
     bool SetParameter(string parameter, string option);
     bool WriteParameter(string parameter, string command);
 
-    int getRbackgnd();
-    int getGbackgnd();
-    int getBbackgnd();
-    int getScale();
     string getFilename();
-    CImage* getImg();
     int getMaxX();
     int getMaxY();
     int getMaxZ();
