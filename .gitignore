@@ -34,3 +34,7 @@ bin/VectorDrawing
 *.o
 
 *.ini
+
+*.bmp
+*.vec
+*.temp
