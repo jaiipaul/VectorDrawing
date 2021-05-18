@@ -9,7 +9,7 @@ int ShapesMenu(CDrawing* Drawing){
     cout << "\033[43mD";
     cout << "\033[44m";
     cout << " \033[0m>>> ";
-    cout << Drawing->_filename.substr(0, Drawing->_filename.find("."));
+    cout << Drawing->getFilename().substr(0, Drawing->getFilename().find("."));
     cout << " >> SHAPES >>" ;//| ADD | REMOVE | LIST | BACK" << endl;
     cout << " | \033[47m\033[30m ADD + \033[0m";
     cout << " | \033[47m\033[30m REMOVE - \033[0m";
@@ -27,7 +27,7 @@ int ShapesMenu(CDrawing* Drawing){
       Drawing->showShapes();
       cout << ">>> Shape to remove (Index) : ";
       cin  >> index;
-      if(index <= Drawing->_size){
+      if(index <= Drawing->getSize()){
         Drawing->removeShape(index);
         cout << ">>> Shape n°" << index << " removed from drawing" << endl;
       }else{
@@ -53,7 +53,7 @@ int ParameterMenu(CDrawing* Drawing, string option){
     cout << "\033[43mD";
     cout << "\033[44m";
     cout << " \033[0m>>> ";
-    cout << Drawing->_filename.substr(0, Drawing->_filename.find("."));
+    cout << Drawing->getFilename().substr(0, Drawing->getFilename().find("."));
     cout << " >> EDIT >> " << option << " >> ";
 
     if(status == true){
@@ -86,7 +86,7 @@ int EditMenu(CDrawing* Drawing){
     cout << "\033[43mD";
     cout << "\033[44m";
     cout << " \033[0m>>> ";
-    cout << Drawing->_filename.substr(0, Drawing->_filename.find("."));
+    cout << Drawing->getFilename().substr(0, Drawing->getFilename().find("."));
     cout << " >> EDIT >>" ;
     cout << " | \033[47m\033[30m SIZE \033[0m";
     cout << " | \033[47m\033[30m BACKGROUND \033[0m";
@@ -111,7 +111,7 @@ int Menu(CDrawing* Drawing){
     cout << "\033[43mD";
     cout << "\033[44m";
     cout << " \033[0m>>> ";
-    cout << Drawing->_filename.substr(0, Drawing->_filename.find("."));
+    cout << Drawing->getFilename().substr(0, Drawing->getFilename().find("."));
     cout << " >>";
     cout << " | \033[42m\033[30m DRAW \033[0m";
     cout << " | \033[47m\033[30m EDIT \033[0m";
@@ -133,7 +133,7 @@ int Menu(CDrawing* Drawing){
       Info(Drawing);
     }
     else if(option == "BACK" || option == "back" || option == "<"){
-      remove((Drawing->_filename+".temp").c_str());
+      remove((Drawing->getFilename()+".temp").c_str());
       return 0;
     }
   }
@@ -158,10 +158,10 @@ int StartMenu(){
       cout << "Filename : ";
       string name;
       cin >> name;
-      Drawing->_filename = name+".vec";
-      bool create = Drawing->CreateFile(Drawing->_filename);
+      Drawing->SetFilename(name+".vec");
+      bool create = Drawing->CreateFile(Drawing->getFilename());
       if (create == true){
-        cout << ">>> " << Drawing->_filename << " created" << endl;
+        cout << ">>> " << Drawing->getFilename() << " created" << endl;
         Menu(Drawing);
         delete Drawing;
       }
@@ -171,10 +171,10 @@ int StartMenu(){
       cout << "Filename : ";
       string name;
       cin >> name;
-      Drawing->_filename = name+".vec";
-      bool load = Drawing->LoadDrawing(Drawing->_filename);
+      Drawing->SetFilename(name+".vec");
+      bool load = Drawing->LoadDrawing(Drawing->getFilename());
       if(load == true){
-        cout << ">>> " << Drawing->_filename << " loaded" << endl;
+        cout << ">>> " << Drawing->getFilename() << " loaded" << endl;
         Menu(Drawing);
         delete Drawing;
       }

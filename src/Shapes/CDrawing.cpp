@@ -53,6 +53,10 @@ CDrawing::~CDrawing(){
     delete _img;
 }
 //FILE--------------------------------------------------------------------------
+void CDrawing::SetFilename(string filename){
+  _filename = filename;
+}
+
 bool CDrawing::CreateFile(const string filename){
   ofstream outfile;
   outfile.open(filename);
@@ -495,3 +499,60 @@ bool CDrawing::WriteParameter(string parameter, string command){
   return true;
 }
 //------------------------------------------------------------------------------
+int CDrawing::getRbackgnd(){
+  return _r_backgnd;
+}
+
+int CDrawing::getGbackgnd(){
+  return _g_backgnd;
+}
+
+int CDrawing::getBbackgnd(){
+  return _b_backgnd;
+}
+
+int CDrawing::getScale(){
+  return _scale;
+}
+
+string CDrawing::getFilename(){
+  return _filename;
+}
+
+CImage* CDrawing::getImg(){
+  return _img;
+}
+
+int CDrawing::getMaxX(){
+  return _maxX;
+}
+
+int CDrawing::getMaxY(){
+  return _maxY;
+}
+
+int CDrawing::getMaxZ(){
+  return _maxZ;
+}
+
+int CDrawing::getSize(){
+  return _size;
+}
+
+void CDrawing::Info(){
+    cout << endl;
+    cout << "##----" << " PROPERTIES OF : "<< _filename.substr(0, _filename.find(".")) << " ----## " << endl;
+
+    cout << "SIZE : "  << _maxX  << " x " << _maxY << " pixels" << endl;
+    cout << "PLANS : " << _maxZ  << endl;
+    cout << "BACKGROUND : " << "R:" << _r_backgnd << " G:" << _g_backgnd << " B:" << _b_backgnd << endl;
+    cout << "SCALE : " << _scale << endl;
+    cout << _size << " shapes" << endl;
+
+    string str = "##---- PROPERTIES OF :  ----##";
+    for(int i = 0; i < str.size() + (_filename.substr(0, _filename.find("."))).size(); i++){
+      cout << "-";
+    }
+    cout << endl;
+    cout << endl;
+}

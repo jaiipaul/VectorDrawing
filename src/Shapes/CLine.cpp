@@ -94,7 +94,7 @@ void CLine::draw(CImage* img){
 
     if(0 < py && py < img->getHeight()){
       CLigne* row = img->getLigne(py);
-      if(0 < px && px < img->getwidth()){
+      if(0 < px && px < img->getWidth()){
         CPixel* pix = row->getPixel(px);
         pix->RGB(opacityR(pix), opacityG(pix), opacityB(pix));
       }

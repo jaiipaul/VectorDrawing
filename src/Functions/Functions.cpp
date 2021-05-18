@@ -5,16 +5,16 @@ void Draw(CDrawing *Drawing){
   cout << "(II) CBitmap object creation" << endl;
   CBitmap *image = new CBitmap();
 
-  string filename2 = Drawing->_filename.substr(0, Drawing->_filename.find(".")) + ".bmp";
+  string filename2 = Drawing->getFilename().substr(0, Drawing->getFilename().find(".")) + ".bmp";
   //remove(filename2.c_str());
   cout << "(II) CImage pointer extraction" << endl;
   //if(Drawing->_img != NULL){
   //delete Drawing->_img;
   //}
-  Drawing->CreateImage(Drawing->_scale*Drawing->_maxX, Drawing->_scale*Drawing->_maxY, Drawing->_r_backgnd, Drawing->_g_backgnd, Drawing->_b_backgnd);
+  Drawing->CreateImage(Drawing->getScale()*Drawing->getMaxX(), Drawing->getScale()*Drawing->getMaxY(), Drawing->getRbackgnd(), Drawing->getGbackgnd(), Drawing->getBbackgnd());
   Drawing->DrawImage();
 
-  image->setImage( Drawing->_img );
+  image->setImage( Drawing->getImg() );
   cout << "(II) CBitmap image saving" << endl;
   image->SaveBMP(filename2);
 
@@ -22,21 +22,22 @@ void Draw(CDrawing *Drawing){
 }
 
 void Info(CDrawing *Drawing){
-    cout << endl;
-    cout << "##----" << " PROPERTIES OF : "<< Drawing->_filename.substr(0, Drawing->_filename.find(".")) << " ----## " << endl;
+  Drawing->Info();
+    //cout << endl;
+    //cout << "##----" << " PROPERTIES OF : "<< Drawing->_filename.substr(0, Drawing->_filename.find(".")) << " ----## " << endl;
 
-    cout << "SIZE : "  << Drawing->_maxX  << " x " << Drawing->_maxY << " pixels" << endl;
-    cout << "PLANS : " << Drawing->_maxZ  << endl;
-    cout << "BACKGROUND : " << "R:" << Drawing->_r_backgnd << " G:" << Drawing->_g_backgnd << " B:" << Drawing->_b_backgnd << endl;
-    cout << "SCALE : " << Drawing->_scale << endl;
-    cout << Drawing->_size << " shapes" << endl;
+    //cout << "SIZE : "  << Drawing->_maxX  << " x " << Drawing->_maxY << " pixels" << endl;
+    //cout << "PLANS : " << Drawing->_maxZ  << endl;
+    //cout << "BACKGROUND : " << "R:" << Drawing->_r_backgnd << " G:" << Drawing->_g_backgnd << " B:" << Drawing->_b_backgnd << endl;
+    //cout << "SCALE : " << Drawing->_scale << endl;
+    //cout << Drawing->_size << " shapes" << endl;
 
-    string str = "##---- PROPERTIES OF :  ----##";
-    for(int i = 0; i < str.size() + (Drawing->_filename.substr(0, Drawing->_filename.find("."))).size(); i++){
-      cout << "-";
-    }
-    cout << endl;
-    cout << endl;
+    //string str = "##---- PROPERTIES OF :  ----##";
+    //for(int i = 0; i < str.size() + (Drawing->_filename.substr(0, Drawing->_filename.find("."))).size(); i++){
+    //  cout << "-";
+    //}
+    //cout << endl;
+    //cout << endl;
 }
 
 void Help(){
@@ -78,10 +79,10 @@ void Help(){
 
 bool check_Xlocation(int x,  CDrawing* Drawing){
   if(Drawing->ParameterStatus("SIZE") == true){
-    if (x <= Drawing->_maxX){
+    if (x <= Drawing->getMaxX()){
       return true;
     }else{
-      cout << "|!| X is out of image border...(maxY = " << Drawing->_maxX << " )" << endl;
+      cout << "|!| X is out of image border...(maxY = " << Drawing->getMaxX() << " )" << endl;
       return false;
     }
   }else{
@@ -91,10 +92,10 @@ bool check_Xlocation(int x,  CDrawing* Drawing){
 
 bool check_Ylocation(int y,  CDrawing* Drawing){
   if(Drawing->ParameterStatus("SIZE") == true){
-    if (y <= Drawing->_maxY){
+    if (y <= Drawing->getMaxY()){
       return true;
     }else{
-      cout << "|!| Y is out of image border... (maxY = " << Drawing->_maxY << " )" << endl;
+      cout << "|!| Y is out of image border... (maxY = " << Drawing->getMaxY() << " )" << endl;
       return false;
     }
   }else{
@@ -104,10 +105,10 @@ bool check_Ylocation(int y,  CDrawing* Drawing){
 
 bool check_width(int width, int x_pos,  CDrawing* Drawing){
   if(Drawing->ParameterStatus("SIZE") == true){
-    if (x_pos + width <= Drawing->_maxX){
+    if (x_pos + width <= Drawing->getMaxX()){
       return true;
     }else{
-      cout << "|!| Width too large... (max = " << Drawing->_maxX - x_pos << " )" << endl;
+      cout << "|!| Width too large... (max = " << Drawing->getMaxX() - x_pos << " )" << endl;
       return false;
     }
   }else{
@@ -117,10 +118,10 @@ bool check_width(int width, int x_pos,  CDrawing* Drawing){
 
 bool check_height(int width, int y_pos,  CDrawing* Drawing){
   if(Drawing->ParameterStatus("SIZE") == true){
-    if (y_pos + width <= Drawing->_maxY){
+    if (y_pos + width <= Drawing->getMaxY()){
       return true;
     }else{
-      cout << "|!| Heigth too large... (max = " << Drawing->_maxY - y_pos << " )" << endl;
+      cout << "|!| Heigth too large... (max = " << Drawing->getMaxY() - y_pos << " )" << endl;
       return false;
     }
   }else{
@@ -130,11 +131,11 @@ bool check_height(int width, int y_pos,  CDrawing* Drawing){
 
 bool check_radius(int radius, int x_pos, int y_pos,  CDrawing* Drawing){
   if(Drawing->ParameterStatus("SIZE") == true){
-    if (x_pos + radius > Drawing->_maxX){
-      cout << "|!| Radius too large... (max = " << Drawing->_maxX - x_pos << " )" << endl;
+    if (x_pos + radius > Drawing->getMaxX()){
+      cout << "|!| Radius too large... (max = " << Drawing->getMaxX() - x_pos << " )" << endl;
       return false;
-    }else if(y_pos + radius > Drawing->_maxY){
-      cout << "|!| Radius too large... (max = " << Drawing->_maxY - y_pos << " )" << endl;
+    }else if(y_pos + radius > Drawing->getMaxY()){
+      cout << "|!| Radius too large... (max = " << Drawing->getMaxY() - y_pos << " )" << endl;
       return false;
     }else{
       return true;

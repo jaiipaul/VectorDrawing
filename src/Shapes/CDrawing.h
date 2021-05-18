@@ -14,7 +14,7 @@ using namespace std;
 #define CDRAWING_H_
 
 class CDrawing{
-  public :
+  private :
     string          _filename;
     CImage*         _img;
     vector<CShape*> _shapes;
@@ -38,6 +38,7 @@ class CDrawing{
     ~CDrawing();
 
   //File
+    void SetFilename(string filename);
     bool CreateFile(const string filename);
     bool LoadDrawing(const string filename);
 
@@ -71,5 +72,18 @@ class CDrawing{
     bool ParameterStatus(string parameter);
     bool SetParameter(string parameter, string option);
     bool WriteParameter(string parameter, string command);
+
+    int getRbackgnd();
+    int getGbackgnd();
+    int getBbackgnd();
+    int getScale();
+    string getFilename();
+    CImage* getImg();
+    int getMaxX();
+    int getMaxY();
+    int getMaxZ();
+    int getSize();
+
+    void Info();
 };
-#endif /*CSHAPE_H_*/
+#endif /*CDRAWING_H_*/
