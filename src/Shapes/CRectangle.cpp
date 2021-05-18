@@ -44,21 +44,21 @@ void CRectangle::draw(CImage* img){
 
   if (_type == "RECTANGLE"){
     for(int ligne =0; ligne < _height; ligne++){
-      if((0 < _y + ligne) && (_y + ligne < img->_hauteur)){
+      if((0 <= _y + ligne) && (_y + ligne < img->getHeight())){
         CLigne* row = img->getLigne(_y + ligne);
         if (_y+1 < ligne < _height-1){
-          if((0 < _x) && (_x < img->_largeur)){
+          if((0 <= _x) && (_x < img->getWidth())){
             CPixel* p = row->getPixel(_x);
             p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }
-          if( (0 < _x + _length - 1) && (_x + _length - 1 < img->_largeur)){
+          if( (0 <= _x + _length - 1) && (_x + _length - 1 < img->getWidth())){
             CPixel* p = row->getPixel(_x + _length - 1);
             p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }
         }
         if(ligne == 0 || ligne == _height-1){
           for(int col = 0; col<_length; col++){
-            if((0 < _x + col) && (_x + col < img->_largeur)){
+            if((0 <= _x + col) && (_x + col < img->getWidth())){
               CPixel* p = row->getPixel(_x + col);
               p->RGB(opacityR(p), opacityG(p), opacityB(p));
             }
@@ -69,10 +69,10 @@ void CRectangle::draw(CImage* img){
   }
   if ( _type == "RECTANGLE_F"){
     for(int ligne =0; ligne < _height; ligne++){
-      if((0 < _y + ligne) && (_y + ligne < img->_hauteur)){
+      if((0 <= _y + ligne) && (_y + ligne < img->getHeight())){
         CLigne* row = img->getLigne(_y + ligne);
         for(int col = 0; col<_length; col++){
-          if( (0 < _x + col) && (_x + col < img->_largeur)){
+          if( (0 <= _x + col) && (_x + col < img->getWidth())){
             CPixel* p = row->getPixel(_x + col);
             p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }
@@ -89,21 +89,21 @@ void CRectangle::draw(CImage* img, int scale){
 
   if (_type == "RECTANGLE"){
     for(int ligne =0; ligne < scale*_height; ligne++){
-      if((0 < scale*_y + ligne) && (scale*_y + ligne < img->_hauteur)){
+      if((0 <= scale*_y + ligne) && (scale*_y + ligne < img->getHeight())){
         CLigne* row = img->getLigne(scale*_y + ligne);
         if (scale*_y+1 < ligne < scale*_height-1){
-          if((0 < scale*_x) && (scale*_x < img->_largeur)){
+          if((0 <= scale*_x) && (scale*_x < img->getWidth())){
             CPixel* p = row->getPixel(scale*_x);
             p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }
-          if( (0 < scale*_x + scale*_length - 1) && (scale*_x + scale*_length - 1 < img->_largeur)){
+          if( (0 <= scale*_x + scale*_length - 1) && (scale*_x + scale*_length - 1 < img->getWidth())){
             CPixel* p = row->getPixel(scale*_x + scale*_length - 1);
             p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }
         }
         if(ligne == 0 || ligne == scale*_height-1){
           for(int col = 0; col<scale*_length; col++){
-            if((0 < scale*_x + col) && (scale*_x + col < img->_largeur)){
+            if((0 <= scale*_x + col) && (scale*_x + col < img->getWidth())){
               CPixel* p = row->getPixel(scale*_x + col);
               p->RGB(opacityR(p), opacityG(p), opacityB(p));
             }
@@ -114,10 +114,10 @@ void CRectangle::draw(CImage* img, int scale){
   }
   if ( _type == "RECTANGLE_F"){
     for(int ligne =0; ligne < scale*_height; ligne++){
-      if((0 < scale*_y + ligne) && (scale*_y + ligne < img->_hauteur)){
+      if((0 <= scale*_y + ligne) && (scale*_y + ligne < img->getHeight())){
         CLigne* row = img->getLigne(scale*_y + ligne);
         for(int col = 0; col<scale*_length; col++){
-          if( (0 < scale*_x + col) && (scale*_x + col < img->_largeur)){
+          if( (0 <= scale*_x + col) && (scale*_x + col < img->getWidth())){
             CPixel* p = row->getPixel(scale*_x + col);
             p->RGB(opacityR(p), opacityG(p), opacityB(p));
           }

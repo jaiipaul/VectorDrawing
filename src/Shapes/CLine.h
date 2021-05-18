@@ -12,7 +12,7 @@ using namespace std;
 #define CLINE_H_
 
 class CLine : public CShape{
-  public :
+  private :
     int    _x1;
     int    _y1;
     int    _x2;

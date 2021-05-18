@@ -11,7 +11,7 @@ using namespace std;
 #define CRECTANGLE_H_
 
 class CRectangle : public CShape{
-  public :
+  private :
     int    _x;
     int    _y;
     int    _length;
