@@ -1,0 +1,19 @@
+//Drawing file : demo.vec which contains all data to draw the picture
+
+//PARAMETERS : 
+//SIZE : 
+//BACKGROUND : 
+//SCALE : 
+
+//SHAPES : 
+LINE : 0, 0, 50, 50, 6, 0, 0, 0, 100;
+LINE : 0, 50, 50, 0, 6, 0, 0, 0, 50;
+RECTANGLE : 10, 10, 30, 30, 1, 255, 0, 0, 100;
+
+RECTANGLE_F : 12, 12, 26, 26, 1, 145, 145, 0, 100;
+DISK_F : 25, 10, 15, 3, 0, 145, 0, 75;
+POINT : 5, 15, 5, 0, 0, 255, 100;
+POINT : 5, 17, 5, 0, 0, 255, 75;
+POINT : 5, 19, 5, 0, 0, 255, 50;
+POINT : 5, 21, 5, 0, 0, 255, 35;
+POINT : 5, 23, 5, 0, 0, 255, 15;

@@ -26,4 +26,4 @@ class CRectangle : public CShape{
    void info();
 };
 
-#endif /*CPOINT_H_*/
+#endif /*CRECTANGLE_H_*/

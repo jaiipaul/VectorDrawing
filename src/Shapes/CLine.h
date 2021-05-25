@@ -27,4 +27,4 @@ class CLine : public CShape{
    void info();
 };
 
-#endif /*CPOINT_H_*/
+#endif /*CLINE_H_*/

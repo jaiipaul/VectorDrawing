@@ -26,4 +26,4 @@ class CDisk : public CShape{
    void info();
 };
 
-#endif /*CPOINT_H_*/
+#endif /*CDISK_H_*/
